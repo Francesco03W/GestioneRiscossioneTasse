@@ -1,0 +1,10 @@
+E:\4E\Risi\sceriffo0\sceriffo0\bin\Debug\sceriffo0.exe.config
+E:\4E\Risi\sceriffo0\sceriffo0\bin\Debug\sceriffo0.exe
+E:\4E\Risi\sceriffo0\sceriffo0\bin\Debug\sceriffo0.pdb
+E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.csprojResolveAssemblyReference.cache
+E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.Tasse1.resources
+E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.Properties.Resources.resources
+E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.csproj.GenerateResource.Cache
+E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.csproj.CoreCompileInputs.cache
+E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.exe
+E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.pdb
