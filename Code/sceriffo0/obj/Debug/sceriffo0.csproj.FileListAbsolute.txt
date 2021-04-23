@@ -8,3 +8,13 @@ E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.csproj.GenerateResource.Cache
 E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.csproj.CoreCompileInputs.cache
 E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.exe
 E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.pdb
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\bin\Debug\sceriffo0.exe.config
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\bin\Debug\sceriffo0.exe
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\bin\Debug\sceriffo0.pdb
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.csprojAssemblyReference.cache
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.Tasse1.resources
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.Properties.Resources.resources
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.csproj.GenerateResource.cache
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.csproj.CoreCompileInputs.cache
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.exe
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.pdb
