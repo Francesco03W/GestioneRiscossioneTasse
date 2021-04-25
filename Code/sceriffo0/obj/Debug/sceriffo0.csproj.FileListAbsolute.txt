@@ -8,3 +8,36 @@ E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.csproj.GenerateResource.Cache
 E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.csproj.CoreCompileInputs.cache
 E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.exe
 E:\4E\Risi\sceriffo0\sceriffo0\obj\Debug\sceriffo0.pdb
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\bin\Debug\sceriffo0.exe.config
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\bin\Debug\sceriffo0.exe
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\bin\Debug\sceriffo0.pdb
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.csprojAssemblyReference.cache
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.Tasse1.resources
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.Properties.Resources.resources
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.csproj.GenerateResource.cache
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.csproj.CoreCompileInputs.cache
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.exe
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.pdb
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\bin\Debug\sceriffo0.exe.config
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\bin\Debug\sceriffo0.exe
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\bin\Debug\sceriffo0.pdb
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\obj\Debug\sceriffo0.csprojAssemblyReference.cache
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\obj\Debug\sceriffo0.Tasse1.resources
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\obj\Debug\sceriffo0.Properties.Resources.resources
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\obj\Debug\sceriffo0.csproj.GenerateResource.cache
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\obj\Debug\sceriffo0.csproj.CoreCompileInputs.cache
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\obj\Debug\sceriffo0.exe
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-6c457c6b4b38eda76a6eb8ecaba1d4a6cfd38dab\Code\sceriffo0\obj\Debug\sceriffo0.pdb
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\bin\Debug\sceriffo0.exe.config
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\bin\Debug\sceriffo0.exe
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\bin\Debug\sceriffo0.pdb
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.csprojAssemblyReference.cache
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.Tasse1.resources
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.Properties.Resources.resources
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.csproj.GenerateResource.cache
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.csproj.CoreCompileInputs.cache
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.csproj.CopyComplete
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.exe
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.pdb
