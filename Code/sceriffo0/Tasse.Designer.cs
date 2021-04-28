@@ -29,11 +29,15 @@
         private void InitializeComponent()
         {
             this.panelLogIn = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.contenitorePasswordLogin = new System.Windows.Forms.TextBox();
             this.srittaPassword = new System.Windows.Forms.Label();
             this.bottoneAccedi = new System.Windows.Forms.Button();
             this.ScrittaLogIn = new System.Windows.Forms.Label();
             this.PannelloAltoSX = new System.Windows.Forms.Panel();
+            this.LabelNumeroSoldiStato = new System.Windows.Forms.Label();
+            this.LabelNumeroSoldiCorona = new System.Windows.Forms.Label();
+            this.LabelSoldiStato = new System.Windows.Forms.Label();
+            this.LabelSoldiCorona = new System.Windows.Forms.Label();
             this.pannelRegistrazione = new System.Windows.Forms.Panel();
             this.bottoneInvioRegistrazione = new System.Windows.Forms.Button();
             this.contenitorePasswordInserita = new System.Windows.Forms.TextBox();
@@ -41,29 +45,43 @@
             this.scrittaRegistrazione = new System.Windows.Forms.Label();
             this.PannelloAltoDX = new System.Windows.Forms.Panel();
             this.PannelloBassoSX = new System.Windows.Forms.Panel();
+            this.labelNumeroMorti = new System.Windows.Forms.Label();
+            this.labelNumeroNati = new System.Windows.Forms.Label();
+            this.labelNumeroInsolventi = new System.Windows.Forms.Label();
+            this.labelNumeroLavoratori = new System.Windows.Forms.Label();
+            this.labelNumeroSudditi = new System.Windows.Forms.Label();
+            this.labelNumeroSudditiNonLavoratori = new System.Windows.Forms.Label();
+            this.labelScrittaNati = new System.Windows.Forms.Label();
+            this.labelScrittaInsolventi = new System.Windows.Forms.Label();
+            this.labelScrittaNoLavoratori = new System.Windows.Forms.Label();
+            this.labelScrittaLavoratori = new System.Windows.Forms.Label();
+            this.labelScrittaSudditi = new System.Windows.Forms.Label();
+            this.labelScrittaMorti = new System.Windows.Forms.Label();
             this.PannelloBassoDX = new System.Windows.Forms.Panel();
             this.panelLogIn.SuspendLayout();
+            this.PannelloAltoSX.SuspendLayout();
             this.pannelRegistrazione.SuspendLayout();
+            this.PannelloBassoSX.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelLogIn
             // 
             this.panelLogIn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLogIn.Controls.Add(this.textBox1);
+            this.panelLogIn.Controls.Add(this.contenitorePasswordLogin);
             this.panelLogIn.Controls.Add(this.srittaPassword);
             this.panelLogIn.Controls.Add(this.bottoneAccedi);
             this.panelLogIn.Controls.Add(this.ScrittaLogIn);
-            this.panelLogIn.Location = new System.Drawing.Point(541, 219);
+            this.panelLogIn.Location = new System.Drawing.Point(518, 204);
             this.panelLogIn.Name = "panelLogIn";
             this.panelLogIn.Size = new System.Drawing.Size(318, 208);
             this.panelLogIn.TabIndex = 0;
             // 
-            // textBox1
+            // contenitorePasswordLogin
             // 
-            this.textBox1.Location = new System.Drawing.Point(51, 111);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(224, 20);
-            this.textBox1.TabIndex = 3;
+            this.contenitorePasswordLogin.Location = new System.Drawing.Point(51, 111);
+            this.contenitorePasswordLogin.Name = "contenitorePasswordLogin";
+            this.contenitorePasswordLogin.Size = new System.Drawing.Size(224, 20);
+            this.contenitorePasswordLogin.TabIndex = 3;
             // 
             // srittaPassword
             // 
@@ -99,10 +117,58 @@
             // PannelloAltoSX
             // 
             this.PannelloAltoSX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PannelloAltoSX.Location = new System.Drawing.Point(10, 11);
+            this.PannelloAltoSX.Controls.Add(this.LabelNumeroSoldiStato);
+            this.PannelloAltoSX.Controls.Add(this.LabelNumeroSoldiCorona);
+            this.PannelloAltoSX.Controls.Add(this.LabelSoldiStato);
+            this.PannelloAltoSX.Controls.Add(this.LabelSoldiCorona);
+            this.PannelloAltoSX.Location = new System.Drawing.Point(10, 3);
             this.PannelloAltoSX.Name = "PannelloAltoSX";
             this.PannelloAltoSX.Size = new System.Drawing.Size(502, 338);
             this.PannelloAltoSX.TabIndex = 1;
+            // 
+            // LabelNumeroSoldiStato
+            // 
+            this.LabelNumeroSoldiStato.AutoSize = true;
+            this.LabelNumeroSoldiStato.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.LabelNumeroSoldiStato.Location = new System.Drawing.Point(140, 61);
+            this.LabelNumeroSoldiStato.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LabelNumeroSoldiStato.Name = "LabelNumeroSoldiStato";
+            this.LabelNumeroSoldiStato.Size = new System.Drawing.Size(20, 24);
+            this.LabelNumeroSoldiStato.TabIndex = 8;
+            this.LabelNumeroSoldiStato.Text = "₤";
+            // 
+            // LabelNumeroSoldiCorona
+            // 
+            this.LabelNumeroSoldiCorona.AutoSize = true;
+            this.LabelNumeroSoldiCorona.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.LabelNumeroSoldiCorona.Location = new System.Drawing.Point(140, 25);
+            this.LabelNumeroSoldiCorona.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LabelNumeroSoldiCorona.Name = "LabelNumeroSoldiCorona";
+            this.LabelNumeroSoldiCorona.Size = new System.Drawing.Size(20, 24);
+            this.LabelNumeroSoldiCorona.TabIndex = 7;
+            this.LabelNumeroSoldiCorona.Text = "₤";
+            // 
+            // LabelSoldiStato
+            // 
+            this.LabelSoldiStato.AutoSize = true;
+            this.LabelSoldiStato.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.LabelSoldiStato.Location = new System.Drawing.Point(20, 61);
+            this.LabelSoldiStato.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LabelSoldiStato.Name = "LabelSoldiStato";
+            this.LabelSoldiStato.Size = new System.Drawing.Size(98, 24);
+            this.LabelSoldiStato.TabIndex = 6;
+            this.LabelSoldiStato.Text = "Soldi Stato";
+            // 
+            // LabelSoldiCorona
+            // 
+            this.LabelSoldiCorona.AutoSize = true;
+            this.LabelSoldiCorona.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.LabelSoldiCorona.Location = new System.Drawing.Point(20, 25);
+            this.LabelSoldiCorona.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LabelSoldiCorona.Name = "LabelSoldiCorona";
+            this.LabelSoldiCorona.Size = new System.Drawing.Size(119, 24);
+            this.LabelSoldiCorona.TabIndex = 5;
+            this.LabelSoldiCorona.Text = "Soldi Corona";
             // 
             // pannelRegistrazione
             // 
@@ -111,10 +177,10 @@
             this.pannelRegistrazione.Controls.Add(this.contenitorePasswordInserita);
             this.pannelRegistrazione.Controls.Add(this.scrittaIstruzioniPassword);
             this.pannelRegistrazione.Controls.Add(this.scrittaRegistrazione);
-            this.pannelRegistrazione.Location = new System.Drawing.Point(541, 26);
+            this.pannelRegistrazione.Location = new System.Drawing.Point(517, 11);
             this.pannelRegistrazione.Margin = new System.Windows.Forms.Padding(2);
             this.pannelRegistrazione.Name = "pannelRegistrazione";
-            this.pannelRegistrazione.Size = new System.Drawing.Size(337, 188);
+            this.pannelRegistrazione.Size = new System.Drawing.Size(318, 188);
             this.pannelRegistrazione.TabIndex = 4;
             // 
             // bottoneInvioRegistrazione
@@ -163,25 +229,169 @@
             // PannelloAltoDX
             // 
             this.PannelloAltoDX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PannelloAltoDX.Location = new System.Drawing.Point(906, 12);
+            this.PannelloAltoDX.Location = new System.Drawing.Point(840, 4);
             this.PannelloAltoDX.Name = "PannelloAltoDX";
-            this.PannelloAltoDX.Size = new System.Drawing.Size(349, 330);
+            this.PannelloAltoDX.Size = new System.Drawing.Size(414, 338);
             this.PannelloAltoDX.TabIndex = 2;
             // 
             // PannelloBassoSX
             // 
             this.PannelloBassoSX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PannelloBassoSX.Location = new System.Drawing.Point(10, 348);
+            this.PannelloBassoSX.Controls.Add(this.labelNumeroMorti);
+            this.PannelloBassoSX.Controls.Add(this.labelNumeroNati);
+            this.PannelloBassoSX.Controls.Add(this.labelNumeroInsolventi);
+            this.PannelloBassoSX.Controls.Add(this.labelNumeroLavoratori);
+            this.PannelloBassoSX.Controls.Add(this.labelNumeroSudditi);
+            this.PannelloBassoSX.Controls.Add(this.labelNumeroSudditiNonLavoratori);
+            this.PannelloBassoSX.Controls.Add(this.labelScrittaNati);
+            this.PannelloBassoSX.Controls.Add(this.labelScrittaInsolventi);
+            this.PannelloBassoSX.Controls.Add(this.labelScrittaNoLavoratori);
+            this.PannelloBassoSX.Controls.Add(this.labelScrittaLavoratori);
+            this.PannelloBassoSX.Controls.Add(this.labelScrittaSudditi);
+            this.PannelloBassoSX.Controls.Add(this.labelScrittaMorti);
+            this.PannelloBassoSX.Location = new System.Drawing.Point(10, 354);
             this.PannelloBassoSX.Name = "PannelloBassoSX";
-            this.PannelloBassoSX.Size = new System.Drawing.Size(622, 323);
+            this.PannelloBassoSX.Size = new System.Drawing.Size(502, 317);
             this.PannelloBassoSX.TabIndex = 3;
+            // 
+            // labelNumeroMorti
+            // 
+            this.labelNumeroMorti.AutoSize = true;
+            this.labelNumeroMorti.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelNumeroMorti.Location = new System.Drawing.Point(208, 275);
+            this.labelNumeroMorti.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNumeroMorti.Name = "labelNumeroMorti";
+            this.labelNumeroMorti.Size = new System.Drawing.Size(23, 20);
+            this.labelNumeroMorti.TabIndex = 16;
+            this.labelNumeroMorti.Text = "n°";
+            // 
+            // labelNumeroNati
+            // 
+            this.labelNumeroNati.AutoSize = true;
+            this.labelNumeroNati.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelNumeroNati.Location = new System.Drawing.Point(208, 243);
+            this.labelNumeroNati.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNumeroNati.Name = "labelNumeroNati";
+            this.labelNumeroNati.Size = new System.Drawing.Size(23, 20);
+            this.labelNumeroNati.TabIndex = 15;
+            this.labelNumeroNati.Text = "n°";
+            // 
+            // labelNumeroInsolventi
+            // 
+            this.labelNumeroInsolventi.AutoSize = true;
+            this.labelNumeroInsolventi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelNumeroInsolventi.Location = new System.Drawing.Point(208, 210);
+            this.labelNumeroInsolventi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNumeroInsolventi.Name = "labelNumeroInsolventi";
+            this.labelNumeroInsolventi.Size = new System.Drawing.Size(23, 20);
+            this.labelNumeroInsolventi.TabIndex = 14;
+            this.labelNumeroInsolventi.Text = "n°";
+            // 
+            // labelNumeroLavoratori
+            // 
+            this.labelNumeroLavoratori.AutoSize = true;
+            this.labelNumeroLavoratori.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelNumeroLavoratori.Location = new System.Drawing.Point(208, 130);
+            this.labelNumeroLavoratori.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNumeroLavoratori.Name = "labelNumeroLavoratori";
+            this.labelNumeroLavoratori.Size = new System.Drawing.Size(23, 20);
+            this.labelNumeroLavoratori.TabIndex = 13;
+            this.labelNumeroLavoratori.Text = "n°";
+            // 
+            // labelNumeroSudditi
+            // 
+            this.labelNumeroSudditi.AutoSize = true;
+            this.labelNumeroSudditi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelNumeroSudditi.Location = new System.Drawing.Point(208, 95);
+            this.labelNumeroSudditi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNumeroSudditi.Name = "labelNumeroSudditi";
+            this.labelNumeroSudditi.Size = new System.Drawing.Size(23, 20);
+            this.labelNumeroSudditi.TabIndex = 12;
+            this.labelNumeroSudditi.Text = "n°";
+            // 
+            // labelNumeroSudditiNonLavoratori
+            // 
+            this.labelNumeroSudditiNonLavoratori.AutoSize = true;
+            this.labelNumeroSudditiNonLavoratori.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelNumeroSudditiNonLavoratori.Location = new System.Drawing.Point(208, 180);
+            this.labelNumeroSudditiNonLavoratori.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNumeroSudditiNonLavoratori.Name = "labelNumeroSudditiNonLavoratori";
+            this.labelNumeroSudditiNonLavoratori.Size = new System.Drawing.Size(23, 20);
+            this.labelNumeroSudditiNonLavoratori.TabIndex = 11;
+            this.labelNumeroSudditiNonLavoratori.Text = "n°";
+            // 
+            // labelScrittaNati
+            // 
+            this.labelScrittaNati.AutoSize = true;
+            this.labelScrittaNati.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelScrittaNati.Location = new System.Drawing.Point(22, 237);
+            this.labelScrittaNati.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelScrittaNati.Name = "labelScrittaNati";
+            this.labelScrittaNati.Size = new System.Drawing.Size(149, 20);
+            this.labelScrittaNati.TabIndex = 10;
+            this.labelScrittaNati.Text = "Numero Nati Mensili";
+            // 
+            // labelScrittaInsolventi
+            // 
+            this.labelScrittaInsolventi.AutoSize = true;
+            this.labelScrittaInsolventi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelScrittaInsolventi.Location = new System.Drawing.Point(21, 204);
+            this.labelScrittaInsolventi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelScrittaInsolventi.Name = "labelScrittaInsolventi";
+            this.labelScrittaInsolventi.Size = new System.Drawing.Size(188, 20);
+            this.labelScrittaInsolventi.TabIndex = 9;
+            this.labelScrittaInsolventi.Text = "Numero Insolventi Mensili";
+            // 
+            // labelScrittaNoLavoratori
+            // 
+            this.labelScrittaNoLavoratori.AutoSize = true;
+            this.labelScrittaNoLavoratori.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelScrittaNoLavoratori.Location = new System.Drawing.Point(22, 154);
+            this.labelScrittaNoLavoratori.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelScrittaNoLavoratori.Name = "labelScrittaNoLavoratori";
+            this.labelScrittaNoLavoratori.Size = new System.Drawing.Size(161, 40);
+            this.labelScrittaNoLavoratori.TabIndex = 8;
+            this.labelScrittaNoLavoratori.Text = "Numero Sudditi \r\nNon In Età Lavorativa";
+            // 
+            // labelScrittaLavoratori
+            // 
+            this.labelScrittaLavoratori.AutoSize = true;
+            this.labelScrittaLavoratori.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelScrittaLavoratori.Location = new System.Drawing.Point(22, 124);
+            this.labelScrittaLavoratori.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelScrittaLavoratori.Name = "labelScrittaLavoratori";
+            this.labelScrittaLavoratori.Size = new System.Drawing.Size(139, 20);
+            this.labelScrittaLavoratori.TabIndex = 7;
+            this.labelScrittaLavoratori.Text = "Numero Lavoratori";
+            // 
+            // labelScrittaSudditi
+            // 
+            this.labelScrittaSudditi.AutoSize = true;
+            this.labelScrittaSudditi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelScrittaSudditi.Location = new System.Drawing.Point(21, 95);
+            this.labelScrittaSudditi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelScrittaSudditi.Name = "labelScrittaSudditi";
+            this.labelScrittaSudditi.Size = new System.Drawing.Size(122, 20);
+            this.labelScrittaSudditi.TabIndex = 6;
+            this.labelScrittaSudditi.Text = "Numero Sudditi ";
+            // 
+            // labelScrittaMorti
+            // 
+            this.labelScrittaMorti.AutoSize = true;
+            this.labelScrittaMorti.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelScrittaMorti.Location = new System.Drawing.Point(20, 268);
+            this.labelScrittaMorti.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelScrittaMorti.Name = "labelScrittaMorti";
+            this.labelScrittaMorti.Size = new System.Drawing.Size(156, 20);
+            this.labelScrittaMorti.TabIndex = 5;
+            this.labelScrittaMorti.Text = "Numero Morti Mensili";
             // 
             // PannelloBassoDX
             // 
             this.PannelloBassoDX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PannelloBassoDX.Location = new System.Drawing.Point(637, 348);
+            this.PannelloBassoDX.Location = new System.Drawing.Point(747, 418);
             this.PannelloBassoDX.Name = "PannelloBassoDX";
-            this.PannelloBassoDX.Size = new System.Drawing.Size(618, 323);
+            this.PannelloBassoDX.Size = new System.Drawing.Size(508, 253);
             this.PannelloBassoDX.TabIndex = 4;
             // 
             // Tasse1
@@ -201,8 +411,12 @@
             this.Load += new System.EventHandler(this.Tasse1_Load);
             this.panelLogIn.ResumeLayout(false);
             this.panelLogIn.PerformLayout();
+            this.PannelloAltoSX.ResumeLayout(false);
+            this.PannelloAltoSX.PerformLayout();
             this.pannelRegistrazione.ResumeLayout(false);
             this.pannelRegistrazione.PerformLayout();
+            this.PannelloBassoSX.ResumeLayout(false);
+            this.PannelloBassoSX.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -213,7 +427,7 @@
         private System.Windows.Forms.Label ScrittaLogIn;
         private System.Windows.Forms.Button bottoneAccedi;
         private System.Windows.Forms.Label srittaPassword;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox contenitorePasswordLogin;
         private System.Windows.Forms.Panel PannelloAltoSX;
         private System.Windows.Forms.Panel PannelloAltoDX;
         private System.Windows.Forms.Panel PannelloBassoSX;
@@ -223,6 +437,22 @@
         private System.Windows.Forms.TextBox contenitorePasswordInserita;
         private System.Windows.Forms.Label scrittaIstruzioniPassword;
         private System.Windows.Forms.Label scrittaRegistrazione;
+        private System.Windows.Forms.Label LabelNumeroSoldiStato;
+        private System.Windows.Forms.Label LabelNumeroSoldiCorona;
+        private System.Windows.Forms.Label LabelSoldiStato;
+        private System.Windows.Forms.Label LabelSoldiCorona;
+        private System.Windows.Forms.Label labelScrittaNati;
+        private System.Windows.Forms.Label labelScrittaInsolventi;
+        private System.Windows.Forms.Label labelScrittaNoLavoratori;
+        private System.Windows.Forms.Label labelScrittaLavoratori;
+        private System.Windows.Forms.Label labelScrittaSudditi;
+        private System.Windows.Forms.Label labelScrittaMorti;
+        private System.Windows.Forms.Label labelNumeroMorti;
+        private System.Windows.Forms.Label labelNumeroNati;
+        private System.Windows.Forms.Label labelNumeroInsolventi;
+        private System.Windows.Forms.Label labelNumeroLavoratori;
+        private System.Windows.Forms.Label labelNumeroSudditi;
+        private System.Windows.Forms.Label labelNumeroSudditiNonLavoratori;
     }
 }
 

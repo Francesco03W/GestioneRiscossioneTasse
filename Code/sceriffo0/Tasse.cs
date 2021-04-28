@@ -24,10 +24,15 @@ namespace sceriffo0
     public partial class Tasse1 : Form
     {
         // DA FINIRE *non toccare*:
-        // mettere l'inserimento della password con il pulsante "accedi" e controllare che sia uguale a quella già impostata nell'User.Password
+        // Login e registrazione    completati
+        // UI                       incompleta
+        // Tassazione               incompleta
+        // Stipendi                 incompleta
+        // Gestione MortiNascite    incompleta
+        // Eventi casuali           incompleta
+        // ORA: creare la lista degli abitanti 
 
-        Utente User = new Utente(); // - ok
-        Utente Userload = new Utente(); //test, non badateci
+        Utente User = new Utente(); 
 
         public Tasse1()
         {
@@ -78,9 +83,35 @@ namespace sceriffo0
 
         private void bottoneAccedi_Click(object sender, EventArgs e)
         {
-            panelLogIn.Visible = false;
-            
+            User = JsonConvert.DeserializeObject<Utente>(File.ReadAllText(String.Format(@"Login\\datilogin.json")));
+            string hashDecritt = "cr1tt0gr4f1@";
 
+            byte[] datiPasswordDec = Convert.FromBase64String(User.Password);
+            using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+            {
+                byte[] chiavi = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hashDecritt));
+                using (TripleDESCryptoServiceProvider tripDes = new TripleDESCryptoServiceProvider() { Key = chiavi, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
+                {
+                    ICryptoTransform convertitoreDecritto = tripDes.CreateDecryptor();
+                    byte[] convertitoDecritto = convertitoreDecritto.TransformFinalBlock(datiPasswordDec, 0, datiPasswordDec.Length);
+                    //prima si deserializza, poi si decodifica
+
+                    User.Password = UTF8Encoding.UTF8.GetString(convertitoDecritto);
+                }
+            }
+            if (contenitorePasswordLogin.Text == User.Password)
+            {
+                //la password è corretta e corrisponde con quella salvata nella registrazione
+                panelLogIn.Visible = false;
+                PannelloAltoDX.Visible = true;
+                PannelloAltoSX.Visible = true;
+                PannelloBassoSX.Visible = true;
+                PannelloBassoDX.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show("La password inserita non è corretta", "ERRORE DI AUTENTICAZIONE", MessageBoxButtons.OK);
+            }
         }
 
         private void BottoneInvioRegistrazione_Click(object sender, EventArgs e)

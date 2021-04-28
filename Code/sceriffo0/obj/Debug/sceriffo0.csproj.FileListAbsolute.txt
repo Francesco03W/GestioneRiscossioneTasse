@@ -41,3 +41,16 @@ C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Deb
 C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.csproj.CopyComplete
 C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.exe
 C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\Code - 2\sceriffo0\obj\Debug\sceriffo0.pdb
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\bin\Debug\sceriffo0.exe.config
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\bin\Debug\sceriffo0.exe
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\bin\Debug\sceriffo0.pdb
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\bin\Debug\Newtonsoft.Json.dll
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\bin\Debug\Newtonsoft.Json.xml
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.csprojAssemblyReference.cache
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.Tasse1.resources
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.Properties.Resources.resources
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.csproj.GenerateResource.cache
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.csproj.CoreCompileInputs.cache
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.csproj.CopyComplete
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.exe
+D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.pdb
