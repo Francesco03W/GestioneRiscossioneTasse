@@ -32,7 +32,13 @@ namespace sceriffo0
         // Eventi casuali           incompleta
         // ORA: creare la lista degli abitanti 
 
-        Utente User = new Utente(); 
+        Utente User = new Utente(); //utente con password
+        //inizializzazione lista sudditi
+        List<Suddito> ListaSudditi = new List<Suddito>();
+        //inizializzazione array nomi Maschili & femminili
+        string[] NomiMaschili = new string[70];
+        string[] NomiFemminili = new string[70];
+        string[] Cognomi = new string[57];
 
         public Tasse1()
         {
@@ -42,7 +48,7 @@ namespace sceriffo0
 
         private void Tasse1_Load(object sender, EventArgs e)
         {
-
+            
             pannelRegistrazione.Visible = false;
             panelLogIn.Visible = false;
             PannelloAltoDX.Visible = false;
@@ -78,6 +84,209 @@ namespace sceriffo0
                 Directory.CreateDirectory(@"Login");
                 pannelRegistrazione.Visible = true;
             }
+            //creazione array nomi maschili
+
+            NomiMaschili[0] = "Hugh";
+            NomiMaschili[1] = "Baudwin";
+            NomiMaschili[2] = "Everard";
+            NomiMaschili[3] = "Nicholas";
+            NomiMaschili[4] = "Joseph";
+            NomiMaschili[5] = "Leofwin";
+            NomiMaschili[6] = "Amis";
+            NomiMaschili[7] = "Ranulf";
+            NomiMaschili[8] = "Fulke";
+            NomiMaschili[9] = "Theobald";
+            NomiMaschili[10] = "Rowan";
+            NomiMaschili[11] = "Geoffrey";
+            NomiMaschili[12] = "Gervase";
+            NomiMaschili[13] = "Gerard";
+            NomiMaschili[14] = "Godwyn";
+            NomiMaschili[15] = "Philip";
+            NomiMaschili[16] = "Warin";
+            NomiMaschili[17] = "Warner";
+            NomiMaschili[18] = "Thomas";
+            NomiMaschili[19] = "Brom";
+            NomiMaschili[20] = "Hamon";
+            NomiMaschili[21] = "Thurstan";
+            NomiMaschili[22] = "Robert";
+            NomiMaschili[23] = "Roland";
+            NomiMaschili[24] = "Rolf";
+            NomiMaschili[25] = "Walter";
+            NomiMaschili[26] = "Laurence";
+            NomiMaschili[27] = "Reginald";
+            NomiMaschili[28] = "Aglovale";
+            NomiMaschili[29] = "Sayer";
+            NomiMaschili[30] = "Timm";
+            NomiMaschili[31] = "Piers";
+            NomiMaschili[32] = "Cerdic";
+            NomiMaschili[33] = "Randel";
+            NomiMaschili[34] = "Daniel";
+            NomiMaschili[35] = "Denis";
+            NomiMaschili[36] = "Elias";
+            NomiMaschili[37] = "Gabriel";
+            NomiMaschili[38] = "Hector";
+            NomiMaschili[39] = "Humphrey";
+            NomiMaschili[40] = "Gamel";
+            NomiMaschili[41] = "Gregory";
+            NomiMaschili[42] = "James";
+            NomiMaschili[43] = "Jasper";
+            NomiMaschili[44] = "Jeremy";
+            NomiMaschili[45] = "Isaac";
+            NomiMaschili[46] = "Ingram";
+            NomiMaschili[47] = "Isembard";
+            NomiMaschili[48] = "Manfred";
+            NomiMaschili[49] = "Ives";
+            NomiMaschili[50] = "William";
+            NomiMaschili[51] = "Lucius";
+            NomiMaschili[52] = "Wymond";
+            NomiMaschili[53] = "Lambert";
+            NomiMaschili[54] = "Blaise";
+            NomiMaschili[55] = "Griffith";
+            NomiMaschili[56] = "Mabon";
+            NomiMaschili[57] = "Hubert";
+            NomiMaschili[58] = "Gerald";
+            NomiMaschili[59] = "Eustace";
+            NomiMaschili[60] = "Adam";
+            NomiMaschili[61] = "Adelard";
+            NomiMaschili[62] = "Alphonse";
+            NomiMaschili[63] = "Turstin";
+            NomiMaschili[64] = "Guy";
+            NomiMaschili[65] = "Peter";
+            NomiMaschili[66] = "Osric";
+            NomiMaschili[67] = "Ogier";
+            NomiMaschili[68] = "Gareth";
+            NomiMaschili[69] = "Maynard";
+            NomiMaschili[70] = "Miles";
+
+            NomiFemminili[0] = "Elaine";
+            NomiFemminili[1] = "Sarah";
+            NomiFemminili[2] = "Sela";
+            NomiFemminili[3] = "Sigga";
+            NomiFemminili[4] = "Susanna";
+            NomiFemminili[5] = "Althea";
+            NomiFemminili[6] = "Alma";
+            NomiFemminili[7] = "Artemisia";
+            NomiFemminili[8] = "Anne";
+            NomiFemminili[9] = "Anais";
+            NomiFemminili[10] = "Acelina";
+            NomiFemminili[11] = "Aelina";
+            NomiFemminili[12] = "Aldita";
+            NomiFemminili[13] = "Audry";
+            NomiFemminili[14] = "Augusta";
+            NomiFemminili[15] = "Brangwine";
+            NomiFemminili[16] = "Bridget";
+            NomiFemminili[17] = "Genevieve";
+            NomiFemminili[18] = "Guinevere";
+            NomiFemminili[19] = "Catelin";
+            NomiFemminili[20] = "Caterina";
+            NomiFemminili[21] = "Dionisia";
+            NomiFemminili[22] = "Mary";
+            NomiFemminili[23] = "Martha";
+            NomiFemminili[24] = "Elizabeth";
+            NomiFemminili[25] = "Elysande";
+            NomiFemminili[26] = "Christina";
+            NomiFemminili[27] = "Giselle";
+            NomiFemminili[28] = "Regina";
+            NomiFemminili[29] = "Richolda";
+            NomiFemminili[30] = "Roana";
+            NomiFemminili[31] = "Barbetta";
+            NomiFemminili[32] = "Bertha";
+            NomiFemminili[33] = "Clare";
+            NomiFemminili[34] = "Amelina";
+            NomiFemminili[35] = "Cecily";
+            NomiFemminili[36] = "Edith";
+            NomiFemminili[37] = "Ella";
+            NomiFemminili[38] = "Juliana";
+            NomiFemminili[39] = "Ivette";
+            NomiFemminili[40] = "Adelina";
+            NomiFemminili[41] = "Agnes";
+            NomiFemminili[42] = "Alice";
+            NomiFemminili[43] = "Alyson";
+            NomiFemminili[44] = "Dameta";
+            NomiFemminili[45] = "Paulina";
+            NomiFemminili[46] = "Petronilla";
+            NomiFemminili[47] = "ElaEdevaine";
+            NomiFemminili[48] = "Eglenti";
+            NomiFemminili[49] = "Evelune";
+            NomiFemminili[50] = "Emily";
+            NomiFemminili[51] = "Emma";
+            NomiFemminili[52] = "Joan";
+            NomiFemminili[53] = "Johanna";
+            NomiFemminili[54] = "Lavina";
+            NomiFemminili[55] = "Lena";
+            NomiFemminili[56] = "Lovota";
+            NomiFemminili[57] = "Lillian";
+            NomiFemminili[58] = "Maude"; 
+            NomiFemminili[59] = "Milicent";
+            NomiFemminili[60] = "Magdalen";
+            NomiFemminili[61] = "Isabeau";
+            NomiFemminili[62] = "Caesaria";
+            NomiFemminili[63] = "Tephania";
+            NomiFemminili[64] = "Sapphira";
+            NomiFemminili[65] = "Ida";
+            NomiFemminili[66] = "Rosamund";
+            NomiFemminili[67] = "Leticia";
+            NomiFemminili[68] = "Gwendolen";
+            NomiFemminili[69] = "Legarda";
+            NomiFemminili[70] = "Eleanor";
+
+            Cognomi[0]= "Achard";
+            Cognomi[1]= "Ashdown";
+            Cognomi[2]= "Baker";
+            Cognomi[3]= "Baxter";
+            Cognomi[4]= "Burrel"; 
+            Cognomi[5]= "Burrel";
+            Cognomi[6]= "Carter";
+            Cognomi[7]= "Bouchard"; 
+            Cognomi[8]= "Ballard";
+            Cognomi[9]= "Draper";
+            Cognomi[10]= "Bigge";
+            Cognomi[11]= "de Bethencourt";
+            Cognomi[12]= "de Logris";
+            Cognomi[13]= "de Maris";
+            Cognomi[14]= "Challenge";
+            Cognomi[15]= "Clarke";
+            Cognomi[16]= "Cook";
+            Cognomi[17]= "Fletcher";
+            Cognomi[18]= "Bosc";
+            Cognomi[19]= "Brooker";
+            Cognomi[20]= "Browne";
+            Cognomi[21]= "Brickenden";
+            Cognomi[22]= "Cecil";
+            Cognomi[23]= "Capron";
+            Cognomi[24]= "Challener";
+            Cognomi[25]= "Griffen";
+            Cognomi[26]= "Canouville";
+            Cognomi[27]= "Beringar";
+            Cognomi[28]= "Bellecote";
+            Cognomi[29]= "Bertran";
+            Cognomi[30]= "Hachet";
+            Cognomi[31]= "Carpenter";
+            Cognomi[32]= "Cooper";
+            Cognomi[33]= "Foreman";
+            Cognomi[34]= "Hughes";
+            Cognomi[35]= "Duval";
+            Cognomi[36]= "Durville";
+            Cognomi[37]= "de La Reue";
+            Cognomi[38]= "Bauldry";
+            Cognomi[39]= "Godart";
+            Cognomi[40]= "Webber";
+            Cognomi[41]= "Weaver";
+            Cognomi[42]= "Faintrer";
+            Cognomi[43]= "Renold";
+            Cognomi[44]= "Hauville";
+            Cognomi[45]= "Medley";
+            Cognomi[46]= "Lucy";
+            Cognomi[47]= "Lamb";
+            Cognomi[48]= "Burroughs";
+            Cognomi[49]= "Nesdin";
+            Cognomi[50]= "Giffard";
+            Cognomi[51]= "Becker";
+            Cognomi[52]= "Paschal";
+            Cognomi[53]= "Perroy";
+            Cognomi[54]= "Lee";
+            Cognomi[55]= "Brewer";
+            Cognomi[56]= "Sawyer";
 
         }
 
@@ -182,6 +391,22 @@ namespace sceriffo0
             {
                 MessageBox.Show("La password non può contenere spazi vuoti", "ERRORE", MessageBoxButtons.OK);
             }
+
+            //generazione degli abitanti alla prima registrazione
+
+            for (int i = 0; i < 3001; i++)
+            {
+                Suddito NuovoSuddito = new Suddito();
+
+
+
+
+
+
+            }
+
+
+
         }
     }
 }
