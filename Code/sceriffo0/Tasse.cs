@@ -287,7 +287,6 @@ namespace sceriffo0
             Cognomi[54]= "Lee";
             Cognomi[55]= "Brewer";
             Cognomi[56]= "Sawyer";
-
         }
 
         private void bottoneAccedi_Click(object sender, EventArgs e)
@@ -397,16 +396,76 @@ namespace sceriffo0
             for (int i = 0; i < 3001; i++)
             {
                 Suddito NuovoSuddito = new Suddito();
+                Random SceltaNome = new Random();
+                Random SceltaCognome = new Random();
 
+                Random SceltaSesso = new Random();
+                if (SceltaSesso.Next(0, 1) == 1)
+                {
+                    //scelta nome casuale maschile
+                    int sceltanomeintM = SceltaNome.Next(0, 70);
+                    NuovoSuddito.Nome = NomiMaschili[sceltanomeintM];
+                }
+                else
+                {
+                    //scelta nome casuale femminile
+                    int sceltanomeintF = SceltaNome.Next(0, 70);
+                    NuovoSuddito.Nome = NomiFemminili[sceltanomeintF];
 
+                }
+                //scelta cognome casuale
+                int sceltacognomeint = SceltaCognome.Next(0, 56);
+                NuovoSuddito.Cognome = Cognomi[sceltacognomeint];
 
+                //età lavorativa?
+                Random SceltaEtaLav = new Random();
+                int sceltaEtaLavint = SceltaEtaLav.Next(0, 100);
+                if(sceltaEtaLavint<70)
+                {
+                    //nuova nascita
+                    NuovoSuddito.Etàlavorativa = false;
+                }
+                else
+                {
+                    //immigrato
+                    NuovoSuddito.Etàlavorativa = true;
+                }
 
+                Random SceltaMestiere = new Random();
+                int sceltamestiereint = SceltaMestiere.Next(0, 3);
+                //saldo basato sul mestiere
+                if (sceltamestiereint == 0)
+                {
+                    NuovoSuddito.Mestiere = "Agricoltore";
+                    NuovoSuddito.Saldo = 50;
+                }
+                else
+                {
+                    if (sceltamestiereint == 1)
+                    {
+                        NuovoSuddito.Mestiere = "Fabbro";
+                        NuovoSuddito.Saldo = 80;
+                    }
+                    else
+                    {
+                        if (sceltamestiereint == 2)
+                        {
+                            NuovoSuddito.Mestiere = "Guerriero";
+                            NuovoSuddito.Saldo = 100;
+                        }
+                        else
+                        {
 
+                            NuovoSuddito.Mestiere = "Altro";
+                            NuovoSuddito.Saldo = 50;
+                        }
+                    }
+                }
+                //inserimento abitante nella lista
+                ListaSudditi.Add(NuovoSuddito);
+                
 
             }
-
-
-
         }
     }
 }
@@ -415,7 +474,7 @@ public class Suddito
 {
     protected string nome;
     protected string cognome;
-    protected string etàlavorativa; //si o no
+    protected bool etàlavorativa; //si o no
     protected float saldo; //float al posto di double perché occupa 32 bit e non 64
     protected string mestiere;  //anche se non in età lavorativa, nella casta medievale il figlio sapeva già che avrebbe svolto il mestiere del padre
     protected int mesiNonPagati;
@@ -432,7 +491,7 @@ public class Suddito
         set { cognome = value; }
         get { return cognome; }
     }
-    public string Etàlavorativa
+    public bool Etàlavorativa
     {
         set { etàlavorativa =value; }
         get { return etàlavorativa; }
