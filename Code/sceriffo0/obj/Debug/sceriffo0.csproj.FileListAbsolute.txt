@@ -54,3 +54,6 @@ D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Deb
 D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.csproj.CopyComplete
 D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.exe
 D:\ddd\grammi.erba\sceriffo\GestioneRiscossioneTasse-main\Code\sceriffo0\obj\Debug\sceriffo0.pdb
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Utente\Desktop\Francesco\Triennio\4E\C#\FORM\GestioneTasseGITHUB\GestioneRiscossioneTasse\Code\sceriffo0\obj\Debug\sceriffo0.csproj.CopyComplete

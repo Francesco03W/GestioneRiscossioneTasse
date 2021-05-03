@@ -156,7 +156,6 @@ namespace sceriffo0
             NomiMaschili[67] = "Ogier";
             NomiMaschili[68] = "Gareth";
             NomiMaschili[69] = "Maynard";
-            NomiMaschili[70] = "Miles";
 
             NomiFemminili[0] = "Elaine";
             NomiFemminili[1] = "Sarah";
@@ -228,7 +227,6 @@ namespace sceriffo0
             NomiFemminili[67] = "Leticia";
             NomiFemminili[68] = "Gwendolen";
             NomiFemminili[69] = "Legarda";
-            NomiFemminili[70] = "Eleanor";
 
             Cognomi[0]= "Achard";
             Cognomi[1]= "Ashdown";
@@ -403,18 +401,18 @@ namespace sceriffo0
                 if (SceltaSesso.Next(0, 1) == 1)
                 {
                     //scelta nome casuale maschile
-                    int sceltanomeintM = SceltaNome.Next(0, 70);
+                    int sceltanomeintM = SceltaNome.Next(0, 69);
                     NuovoSuddito.Nome = NomiMaschili[sceltanomeintM];
                 }
                 else
                 {
                     //scelta nome casuale femminile
-                    int sceltanomeintF = SceltaNome.Next(0, 70);
+                    int sceltanomeintF = SceltaNome.Next(0, 69);
                     NuovoSuddito.Nome = NomiFemminili[sceltanomeintF];
 
                 }
                 //scelta cognome casuale
-                int sceltacognomeint = SceltaCognome.Next(0, 56);
+                int sceltacognomeint = SceltaCognome.Next(0, 55);
                 NuovoSuddito.Cognome = Cognomi[sceltacognomeint];
 
                 //età lavorativa?
@@ -466,6 +464,11 @@ namespace sceriffo0
                 
 
             }
+            //serializzare listasudditi
+            Directory.CreateDirectory(@"Data");
+            File.Create(@"Data\\ListaAbitanti.json").Close();
+            File.WriteAllText(@"Data\\ListaAbitanti.json", JsonConvert.SerializeObject(ListaSudditi,Formatting.Indented));
+            
         }
     }
 }
