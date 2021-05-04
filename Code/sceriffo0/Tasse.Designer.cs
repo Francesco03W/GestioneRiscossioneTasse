@@ -58,10 +58,13 @@
             this.labelScrittaSudditi = new System.Windows.Forms.Label();
             this.labelScrittaMorti = new System.Windows.Forms.Label();
             this.PannelloBassoDX = new System.Windows.Forms.Panel();
+            this.DataGrid_Abitanti = new System.Windows.Forms.DataGridView();
             this.panelLogIn.SuspendLayout();
             this.PannelloAltoSX.SuspendLayout();
             this.pannelRegistrazione.SuspendLayout();
             this.PannelloBassoSX.SuspendLayout();
+            this.PannelloBassoDX.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGrid_Abitanti)).BeginInit();
             this.SuspendLayout();
             // 
             // panelLogIn
@@ -180,7 +183,7 @@
             this.pannelRegistrazione.Location = new System.Drawing.Point(517, 11);
             this.pannelRegistrazione.Margin = new System.Windows.Forms.Padding(2);
             this.pannelRegistrazione.Name = "pannelRegistrazione";
-            this.pannelRegistrazione.Size = new System.Drawing.Size(318, 188);
+            this.pannelRegistrazione.Size = new System.Drawing.Size(319, 188);
             this.pannelRegistrazione.TabIndex = 4;
             // 
             // bottoneInvioRegistrazione
@@ -389,10 +392,22 @@
             // PannelloBassoDX
             // 
             this.PannelloBassoDX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PannelloBassoDX.Controls.Add(this.DataGrid_Abitanti);
             this.PannelloBassoDX.Location = new System.Drawing.Point(747, 418);
             this.PannelloBassoDX.Name = "PannelloBassoDX";
             this.PannelloBassoDX.Size = new System.Drawing.Size(508, 253);
             this.PannelloBassoDX.TabIndex = 4;
+            // 
+            // DataGrid_Abitanti
+            // 
+            this.DataGrid_Abitanti.AllowUserToAddRows = false;
+            this.DataGrid_Abitanti.AllowUserToDeleteRows = false;
+            this.DataGrid_Abitanti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGrid_Abitanti.Location = new System.Drawing.Point(4, 4);
+            this.DataGrid_Abitanti.Name = "DataGrid_Abitanti";
+            this.DataGrid_Abitanti.ReadOnly = true;
+            this.DataGrid_Abitanti.Size = new System.Drawing.Size(473, 220);
+            this.DataGrid_Abitanti.TabIndex = 0;
             // 
             // Tasse1
             // 
@@ -417,6 +432,8 @@
             this.pannelRegistrazione.PerformLayout();
             this.PannelloBassoSX.ResumeLayout(false);
             this.PannelloBassoSX.PerformLayout();
+            this.PannelloBassoDX.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGrid_Abitanti)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -453,6 +470,7 @@
         private System.Windows.Forms.Label labelNumeroLavoratori;
         private System.Windows.Forms.Label labelNumeroSudditi;
         private System.Windows.Forms.Label labelNumeroSudditiNonLavoratori;
+        private System.Windows.Forms.DataGridView DataGrid_Abitanti;
     }
 }
 
