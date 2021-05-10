@@ -25,20 +25,25 @@ namespace sceriffo0
     {
         // DA FINIRE *non toccare*:
         // Login e registrazione    completati
-        // UI                       incompleta
+        // UI                       semi-completa mancano solo decorazioni
         // Tassazione               incompleta
-        // Stipendi                 incompleta
-        // Gestione MortiNascite    incompleta
+        // Stipendi                 completati
+        // Gestione MortiNascite    completati
         // Eventi casuali           incompleta
-        // ORA: creare la lista degli abitanti 
+        // ORA: Tassazione
 
         Utente User = new Utente(); //utente con password
         //inizializzazione lista sudditi
-        List<Suddito> ListaSudditi = new List<Suddito>();
+        
         //inizializzazione array nomi Maschili & femminili
         string[] NomiMaschili = new string[70];
         string[] NomiFemminili = new string[70];
         string[] Cognomi = new string[57];
+
+        Liste Lista = new Liste();
+        //variabili globali
+
+
 
         public Tasse1()
         {
@@ -322,6 +327,7 @@ namespace sceriffo0
 
         private void BottoneInvioRegistrazione_Click(object sender, EventArgs e)
         {
+            bool passwordAccettata = false;
             char lettpass;
             int lettCAPS=0;
             int lettNum=0;
@@ -363,7 +369,7 @@ namespace sceriffo0
                         //la password crittata viene serializzata
                         File.Create(@"Login\\datilogin.json").Close();
                         File.WriteAllText(@"Login\\datilogin.json", JsonConvert.SerializeObject(User,Formatting.Indented));
-
+                        passwordAccettata = true;
 
                         pannelRegistrazione.Visible = false;
                         PannelloAltoDX.Visible = true;
@@ -387,90 +393,206 @@ namespace sceriffo0
             else
             {
                 MessageBox.Show("La password non può contenere spazi vuoti", "ERRORE", MessageBoxButtons.OK);
+
             }
 
-            //generazione degli abitanti alla prima registrazione
-
-            for (int i = 0; i < 3001; i++)
+            if (passwordAccettata == true)
             {
-                Suddito NuovoSuddito = new Suddito();
+                //generazione degli abitanti alla prima registrazione
+                Suddito NuovoSuddito;
+                Random SceltaMestiere = new Random();
                 Random SceltaNome = new Random();
                 Random SceltaCognome = new Random();
-
                 Random SceltaSesso = new Random();
-                if (SceltaSesso.Next(0, 1) == 1)
-                {
-                    //scelta nome casuale maschile
-                    int sceltanomeintM = SceltaNome.Next(0, 69);
-                    NuovoSuddito.Nome = NomiMaschili[sceltanomeintM];
-                }
-                else
-                {
-                    //scelta nome casuale femminile
-                    int sceltanomeintF = SceltaNome.Next(0, 69);
-                    NuovoSuddito.Nome = NomiFemminili[sceltanomeintF];
-
-                }
-                //scelta cognome casuale
-                int sceltacognomeint = SceltaCognome.Next(0, 55);
-                NuovoSuddito.Cognome = Cognomi[sceltacognomeint];
-
-                //età lavorativa?
                 Random SceltaEtaLav = new Random();
-                int sceltaEtaLavint = SceltaEtaLav.Next(0, 100);
-                if(sceltaEtaLavint<70)
+                
+                for (int i = 0; i < 3000; i++)
                 {
-                    //nuova nascita
-                    NuovoSuddito.Etàlavorativa = false;
-                }
-                else
-                {
-                    //immigrato
-                    NuovoSuddito.Etàlavorativa = true;
-                }
-
-                Random SceltaMestiere = new Random();
-                int sceltamestiereint = SceltaMestiere.Next(0, 3);
-                //saldo basato sul mestiere
-                if (sceltamestiereint == 0)
-                {
-                    NuovoSuddito.Mestiere = "Agricoltore";
-                    NuovoSuddito.Saldo = 50;
-                }
-                else
-                {
-                    if (sceltamestiereint == 1)
+                    NuovoSuddito = new Suddito();
+                    if (SceltaSesso.Next(0, 1) == 1)
                     {
-                        NuovoSuddito.Mestiere = "Fabbro";
-                        NuovoSuddito.Saldo = 80;
+                        //scelta nome casuale maschile
+                        int sceltanomeintM = SceltaNome.Next(0, 69);
+                        NuovoSuddito.Nome = NomiMaschili[sceltanomeintM];
                     }
                     else
                     {
-                        if (sceltamestiereint == 2)
+                        //scelta nome casuale femminile
+                        int sceltanomeintF = SceltaNome.Next(0, 69);
+                        NuovoSuddito.Nome = NomiFemminili[sceltanomeintF];
+
+                    }
+                    //scelta cognome casuale
+                    int sceltacognomeint = SceltaCognome.Next(0, 55);
+                    NuovoSuddito.Cognome = Cognomi[sceltacognomeint];
+
+                    //età lavorativa?
+
+                    int sceltaEtaLavint = SceltaEtaLav.Next(0, 100);
+                    if (sceltaEtaLavint < 70)
+                    {
+                        //nuova nascita
+                        NuovoSuddito.Etàlavorativa = false;
+                    }
+                    else
+                    {
+                        //immigrato
+                        NuovoSuddito.Etàlavorativa = true;
+                    }
+
+                    int sceltamestiereint = SceltaMestiere.Next(0, 3);
+                    //saldo basato sul mestiere
+                    if (sceltamestiereint == 0)
+                    {
+                        NuovoSuddito.Mestiere = "Agricoltore";
+                        NuovoSuddito.Saldo = 50;
+                    }
+                    else
+                    {
+                        if (sceltamestiereint == 1)
                         {
-                            NuovoSuddito.Mestiere = "Guerriero";
-                            NuovoSuddito.Saldo = 100;
+                            NuovoSuddito.Mestiere = "Fabbro";
+                            NuovoSuddito.Saldo = 80;
                         }
                         else
                         {
+                            if (sceltamestiereint == 2)
+                            {
+                                NuovoSuddito.Mestiere = "Guerriero";
+                                NuovoSuddito.Saldo = 100;
+                            }
+                            else
+                            {
 
-                            NuovoSuddito.Mestiere = "Altro";
-                            NuovoSuddito.Saldo = 50;
+                                NuovoSuddito.Mestiere = "Altro";
+                                NuovoSuddito.Saldo = 50;
+                            }
                         }
                     }
+                    //inserimento abitante nella lista
+                    Lista.ListaSudditi.Add(NuovoSuddito);
+
+
                 }
-                //inserimento abitante nella lista
-                ListaSudditi.Add(NuovoSuddito);
+                //serializzare listasudditi
+                Directory.CreateDirectory(@"Data");
+                File.Create(@"Data\\ListaAbitanti.json").Close();
+                File.WriteAllText(@"Data\\ListaAbitanti.json", JsonConvert.SerializeObject(Lista, Formatting.Indented));
+
                 
+        }   }
+
+        private void AvantiMeseBtn_Click(object sender, EventArgs e)
+        {
+            Tempo Orologio = new Tempo();
+            Orologio.Anno = 0;
+            Orologio.Mese = Orologio.Mese + 1;
+            if (Orologio.Mese == 12)
+            {
+                Orologio.Anno = Orologio.Anno + 1;
+                //si resettano i 500 denari non tassabili
+                for (int i = 0; i < Lista.ListaSudditi.Count(); i++)
+                {
+                    Lista.ListaSudditi[i].DenariSuddTassabile = 0;
+                    Lista.ListaSudditi[i].Tassabile = false;
+                }
+            }
+
+            //GESTIONE NASCITE
+            int SudditiTotali = Lista.ListaSudditi.Count();
+            int SudditiLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
+            int SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
+            
+            int SudditiInsolventi; //si aggiungono dopo il conto dele tasse
+           
+            int SudditiNuovi;
+            int SudditiMorti;
+            //nascite
+            SudditiNuovi = (8 / 100) * SudditiTotali;
+            SudditiTotali = SudditiTotali + SudditiNuovi;
+            //morti
+            SudditiMorti = (5 / 100) * SudditiTotali;
+            SudditiTotali = SudditiTotali - SudditiMorti;
+
+            int Apprendisti;
+            Apprendisti = (20 / 100) * SudditiNonLavoratori;
+            SudditiLavoratori = SudditiLavoratori + Apprendisti;
+
+            //i sudditi non lavoratori non sono tassabili
+
+            //STIPENDI
+            for (int i = 0; i < Lista.ListaSudditi.Count(); i++)
+            {
+                //in base al mestiere si assegna lo stipendio
+                switch (Lista.ListaSudditi[i].Mestiere)
+                {
+                    case "Agricoltore":
+                        Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 300;
+                        if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
+                        {
+                            Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
+                        }
+                        else
+                            Lista.ListaSudditi[i].Tassabile = true;
+                        break;
+
+                    case "Fabbro":
+                        Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 400;
+                        if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
+                        {
+                            Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
+                        }
+                        else
+                            Lista.ListaSudditi[i].Tassabile = true;
+                        break;
+                    case "Guerriero":
+                        Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 450;
+                        if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
+                        {
+                            Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
+                        }
+                        else
+                            Lista.ListaSudditi[i].Tassabile = true;
+                        break;
+
+                    case "Altro":
+                        Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 300;
+                        if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
+                        {
+                            Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
+                        }
+                        else
+                            Lista.ListaSudditi[i].Tassabile = true;
+                        break;
+                }
+
+                //controllo se tassabile, i mestieri li hanno dalla nascita, la differenza sta nel fatto
+                //che siano o meno in età lavorativa
+                if (Lista.ListaSudditi[i].Etàlavorativa == true && Lista.ListaSudditi[i].Tassabile == true)
+                {
+
+
+
+
+
+
+
+
+
+
+
+                }
+
+
+
 
             }
-            //serializzare listasudditi
-            Directory.CreateDirectory(@"Data");
-            File.Create(@"Data\\ListaAbitanti.json").Close();
-            File.WriteAllText(@"Data\\ListaAbitanti.json", JsonConvert.SerializeObject(ListaSudditi,Formatting.Indented));
-            
         }
     }
+}
+public class Liste
+{
+    public List<Suddito> ListaSudditi = new List<Suddito>();
 }
 //creazione classi
 public class Suddito
@@ -483,6 +605,7 @@ public class Suddito
     protected int mesiNonPagati;
     protected float tasseNonPagate;
     protected int denariSuddTassabile;
+    protected bool tassabile;
 
     public string Nome
     {
@@ -523,6 +646,11 @@ public class Suddito
     {
         set { denariSuddTassabile = value; }
         get { return denariSuddTassabile; }
+    }
+    public bool Tassabile
+    {
+        set { tassabile = value; }
+        get { return tassabile; }
     }
 }
 public class Tempo
