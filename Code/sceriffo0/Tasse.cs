@@ -2,7 +2,7 @@
 /*
  if you use the hash (outdated md5) of a secret string (too short to be secure) to encrypt the password there is no point in hashing the secret here I think
  tripleDES is also deprecated
- storing secrets in code is security issue, but I think it's a practice program so it's no big deal (?))
+ storing secrets in code is security issue,
 */
 
 using System;
@@ -33,27 +33,25 @@ namespace sceriffo0
         // ORA: Tassazione
 
         Utente User = new Utente(); //utente con password
-        //inizializzazione lista sudditi
-        
+        Liste Lista = new Liste(); //creazione oggetto lista
+        Stato Contea = new Stato(); //creazione oggetto stato
+
         //inizializzazione array nomi Maschili & femminili
         string[] NomiMaschili = new string[70];
         string[] NomiFemminili = new string[70];
         string[] Cognomi = new string[57];
 
-        Liste Lista = new Liste();
-        //variabili globali
-
-
+       
 
         public Tasse1()
         {
             InitializeComponent();
-           
+
         }
 
         private void Tasse1_Load(object sender, EventArgs e)
         {
-            
+
             pannelRegistrazione.Visible = false;
             panelLogIn.Visible = false;
             PannelloAltoDX.Visible = false;
@@ -69,7 +67,7 @@ namespace sceriffo0
                 string hashDecritt = "cr1tt0gr4f1@";
 
                 byte[] datiPasswordDec = Convert.FromBase64String(User.Password);
-                using(MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
+                using (MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider())
                 {
                     byte[] chiavi = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(hashDecritt));
                     using (TripleDESCryptoServiceProvider tripDes = new TripleDESCryptoServiceProvider() { Key = chiavi, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
@@ -220,7 +218,7 @@ namespace sceriffo0
             NomiFemminili[55] = "Lena";
             NomiFemminili[56] = "Lovota";
             NomiFemminili[57] = "Lillian";
-            NomiFemminili[58] = "Maude"; 
+            NomiFemminili[58] = "Maude";
             NomiFemminili[59] = "Milicent";
             NomiFemminili[60] = "Magdalen";
             NomiFemminili[61] = "Isabeau";
@@ -233,63 +231,63 @@ namespace sceriffo0
             NomiFemminili[68] = "Gwendolen";
             NomiFemminili[69] = "Legarda";
 
-            Cognomi[0]= "Achard";
-            Cognomi[1]= "Ashdown";
-            Cognomi[2]= "Baker";
-            Cognomi[3]= "Baxter";
-            Cognomi[4]= "Burrel"; 
-            Cognomi[5]= "Burrel";
-            Cognomi[6]= "Carter";
-            Cognomi[7]= "Bouchard"; 
-            Cognomi[8]= "Ballard";
-            Cognomi[9]= "Draper";
-            Cognomi[10]= "Bigge";
-            Cognomi[11]= "de Bethencourt";
-            Cognomi[12]= "de Logris";
-            Cognomi[13]= "de Maris";
-            Cognomi[14]= "Challenge";
-            Cognomi[15]= "Clarke";
-            Cognomi[16]= "Cook";
-            Cognomi[17]= "Fletcher";
-            Cognomi[18]= "Bosc";
-            Cognomi[19]= "Brooker";
-            Cognomi[20]= "Browne";
-            Cognomi[21]= "Brickenden";
-            Cognomi[22]= "Cecil";
-            Cognomi[23]= "Capron";
-            Cognomi[24]= "Challener";
-            Cognomi[25]= "Griffen";
-            Cognomi[26]= "Canouville";
-            Cognomi[27]= "Beringar";
-            Cognomi[28]= "Bellecote";
-            Cognomi[29]= "Bertran";
-            Cognomi[30]= "Hachet";
-            Cognomi[31]= "Carpenter";
-            Cognomi[32]= "Cooper";
-            Cognomi[33]= "Foreman";
-            Cognomi[34]= "Hughes";
-            Cognomi[35]= "Duval";
-            Cognomi[36]= "Durville";
-            Cognomi[37]= "de La Reue";
-            Cognomi[38]= "Bauldry";
-            Cognomi[39]= "Godart";
-            Cognomi[40]= "Webber";
-            Cognomi[41]= "Weaver";
-            Cognomi[42]= "Faintrer";
-            Cognomi[43]= "Renold";
-            Cognomi[44]= "Hauville";
-            Cognomi[45]= "Medley";
-            Cognomi[46]= "Lucy";
-            Cognomi[47]= "Lamb";
-            Cognomi[48]= "Burroughs";
-            Cognomi[49]= "Nesdin";
-            Cognomi[50]= "Giffard";
-            Cognomi[51]= "Becker";
-            Cognomi[52]= "Paschal";
-            Cognomi[53]= "Perroy";
-            Cognomi[54]= "Lee";
-            Cognomi[55]= "Brewer";
-            Cognomi[56]= "Sawyer";
+            Cognomi[0] = "Achard";
+            Cognomi[1] = "Ashdown";
+            Cognomi[2] = "Baker";
+            Cognomi[3] = "Baxter";
+            Cognomi[4] = "Burrel";
+            Cognomi[5] = "Burrel";
+            Cognomi[6] = "Carter";
+            Cognomi[7] = "Bouchard";
+            Cognomi[8] = "Ballard";
+            Cognomi[9] = "Draper";
+            Cognomi[10] = "Bigge";
+            Cognomi[11] = "de Bethencourt";
+            Cognomi[12] = "de Logris";
+            Cognomi[13] = "de Maris";
+            Cognomi[14] = "Challenge";
+            Cognomi[15] = "Clarke";
+            Cognomi[16] = "Cook";
+            Cognomi[17] = "Fletcher";
+            Cognomi[18] = "Bosc";
+            Cognomi[19] = "Brooker";
+            Cognomi[20] = "Browne";
+            Cognomi[21] = "Brickenden";
+            Cognomi[22] = "Cecil";
+            Cognomi[23] = "Capron";
+            Cognomi[24] = "Challener";
+            Cognomi[25] = "Griffen";
+            Cognomi[26] = "Canouville";
+            Cognomi[27] = "Beringar";
+            Cognomi[28] = "Bellecote";
+            Cognomi[29] = "Bertran";
+            Cognomi[30] = "Hachet";
+            Cognomi[31] = "Carpenter";
+            Cognomi[32] = "Cooper";
+            Cognomi[33] = "Foreman";
+            Cognomi[34] = "Hughes";
+            Cognomi[35] = "Duval";
+            Cognomi[36] = "Durville";
+            Cognomi[37] = "de La Reue";
+            Cognomi[38] = "Bauldry";
+            Cognomi[39] = "Godart";
+            Cognomi[40] = "Webber";
+            Cognomi[41] = "Weaver";
+            Cognomi[42] = "Faintrer";
+            Cognomi[43] = "Renold";
+            Cognomi[44] = "Hauville";
+            Cognomi[45] = "Medley";
+            Cognomi[46] = "Lucy";
+            Cognomi[47] = "Lamb";
+            Cognomi[48] = "Burroughs";
+            Cognomi[49] = "Nesdin";
+            Cognomi[50] = "Giffard";
+            Cognomi[51] = "Becker";
+            Cognomi[52] = "Paschal";
+            Cognomi[53] = "Perroy";
+            Cognomi[54] = "Lee";
+            Cognomi[55] = "Brewer";
+            Cognomi[56] = "Sawyer";
         }
 
         private void bottoneAccedi_Click(object sender, EventArgs e)
@@ -329,8 +327,8 @@ namespace sceriffo0
         {
             bool passwordAccettata = false;
             char lettpass;
-            int lettCAPS=0;
-            int lettNum=0;
+            int lettCAPS = 0;
+            int lettNum = 0;
             if (string.IsNullOrWhiteSpace(contenitorePasswordInserita.Text) == false)
             {
                 //facciamo che la password deve contenere almeno 1 numero e 1 lettera maiuscola
@@ -368,7 +366,7 @@ namespace sceriffo0
                         }
                         //la password crittata viene serializzata
                         File.Create(@"Login\\datilogin.json").Close();
-                        File.WriteAllText(@"Login\\datilogin.json", JsonConvert.SerializeObject(User,Formatting.Indented));
+                        File.WriteAllText(@"Login\\datilogin.json", JsonConvert.SerializeObject(User, Formatting.Indented));
                         passwordAccettata = true;
 
                         pannelRegistrazione.Visible = false;
@@ -405,7 +403,7 @@ namespace sceriffo0
                 Random SceltaCognome = new Random();
                 Random SceltaSesso = new Random();
                 Random SceltaEtaLav = new Random();
-                
+
                 for (int i = 0; i < 3000; i++)
                 {
                     NuovoSuddito = new Suddito();
@@ -479,8 +477,9 @@ namespace sceriffo0
                 File.Create(@"Data\\ListaAbitanti.json").Close();
                 File.WriteAllText(@"Data\\ListaAbitanti.json", JsonConvert.SerializeObject(Lista, Formatting.Indented));
 
-                
-        }   }
+
+            }
+        }
 
         private void AvantiMeseBtn_Click(object sender, EventArgs e)
         {
@@ -502,9 +501,9 @@ namespace sceriffo0
             int SudditiTotali = Lista.ListaSudditi.Count();
             int SudditiLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
             int SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
-            
-            int SudditiInsolventi; //si aggiungono dopo il conto dele tasse
-           
+
+            int SudditiInsolventi=0; //si aggiungono dopo il conto dele tasse
+
             int SudditiNuovi;
             int SudditiMorti;
             //nascite
@@ -514,6 +513,85 @@ namespace sceriffo0
             SudditiMorti = (5 / 100) * SudditiTotali;
             SudditiTotali = SudditiTotali - SudditiMorti;
 
+            //VARIABILI TASSAZIONE
+            float TassazioneTotale=0;
+            float IntroitiMensili = 0;
+            float IntroitiPersi = 0;
+
+            Suddito NuovoSuddito;
+
+            //GENERARE I NATI & IMMIGRATI
+            for (int i = 0; i < SudditiNuovi; i++)
+            {
+                Random CaratteristicheNati = new Random();
+                NuovoSuddito = new Suddito();
+                if (CaratteristicheNati.Next(0, 1) == 1)
+                {
+                    //scelta nome casuale maschile
+                    int sceltanomeintM = CaratteristicheNati.Next(0, 69);
+                    NuovoSuddito.Nome = NomiMaschili[sceltanomeintM];
+                }
+                else
+                {
+                    //scelta nome casuale femminile
+                    int sceltanomeintF = CaratteristicheNati.Next(0, 69);
+                    NuovoSuddito.Nome = NomiFemminili[sceltanomeintF];
+
+                }
+                //scelta cognome casuale
+                int sceltacognomeint = CaratteristicheNati.Next(0, 55);
+                NuovoSuddito.Cognome = Cognomi[sceltacognomeint];
+
+                //età lavorativa?
+
+                int sceltaEtaLavint = CaratteristicheNati.Next(0, 100);
+                if (sceltaEtaLavint < 70)
+                {
+                    //nuova nascita
+                    NuovoSuddito.Etàlavorativa = false;
+                }
+                else
+                {
+                    //immigrato
+                    NuovoSuddito.Etàlavorativa = true;
+                }
+
+                int sceltamestiereint = CaratteristicheNati.Next(0, 3);
+                //saldo basato sul mestiere
+                if (sceltamestiereint == 0)
+                {
+                    NuovoSuddito.Mestiere = "Agricoltore";
+                    NuovoSuddito.Saldo = 50;
+                }
+                else
+                {
+                    if (sceltamestiereint == 1)
+                    {
+                        NuovoSuddito.Mestiere = "Fabbro";
+                        NuovoSuddito.Saldo = 80;
+                    }
+                    else
+                    {
+                        if (sceltamestiereint == 2)
+                        {
+                            NuovoSuddito.Mestiere = "Guerriero";
+                            NuovoSuddito.Saldo = 100;
+                        }
+                        else
+                        {
+
+                            NuovoSuddito.Mestiere = "Altro";
+                            NuovoSuddito.Saldo = 50;
+                        }
+                    }
+                }
+                //inserimento abitante nella lista
+                Lista.ListaSudditi.Add(NuovoSuddito);
+
+
+            }
+            //si serializza alla fine di tutto
+            //il 20% di coloro che non lavorano diventano lavoratori ogni anno (stima)
             int Apprendisti;
             Apprendisti = (20 / 100) * SudditiNonLavoratori;
             SudditiLavoratori = SudditiLavoratori + Apprendisti;
@@ -523,73 +601,126 @@ namespace sceriffo0
             //STIPENDI
             for (int i = 0; i < Lista.ListaSudditi.Count(); i++)
             {
-                //in base al mestiere si assegna lo stipendio
-                switch (Lista.ListaSudditi[i].Mestiere)
-                {
-                    case "Agricoltore":
-                        Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 300;
-                        if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
-                        {
-                            Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
-                        }
-                        else
-                            Lista.ListaSudditi[i].Tassabile = true;
-                        break;
-
-                    case "Fabbro":
-                        Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 400;
-                        if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
-                        {
-                            Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
-                        }
-                        else
-                            Lista.ListaSudditi[i].Tassabile = true;
-                        break;
-                    case "Guerriero":
-                        Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 450;
-                        if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
-                        {
-                            Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
-                        }
-                        else
-                            Lista.ListaSudditi[i].Tassabile = true;
-                        break;
-
-                    case "Altro":
-                        Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 300;
-                        if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
-                        {
-                            Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
-                        }
-                        else
-                            Lista.ListaSudditi[i].Tassabile = true;
-                        break;
-                }
-
                 //controllo se tassabile, i mestieri li hanno dalla nascita, la differenza sta nel fatto
-                //che siano o meno in età lavorativa
-                if (Lista.ListaSudditi[i].Etàlavorativa == true && Lista.ListaSudditi[i].Tassabile == true)
+                //gli stipendi vanno dati se sono lavoratori
+                if (Lista.ListaSudditi[i].Etàlavorativa == true)
                 {
+                    //in base al mestiere si assegna lo stipendio
+                    switch (Lista.ListaSudditi[i].Mestiere)
+                    {
+                        case "Agricoltore":
+                            //stipendio
+                            Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 300;
+                            //controllo se sono i prmi 500 denari dell'anno non tassabili
+                            if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
+                            {
+                                Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
+                            }
+                            else
+                                Lista.ListaSudditi[i].Tassabile = true;
+                            
+                            break;
 
+                        case "Fabbro":
+                            Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 400;
+                            if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
+                            {
+                                Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
+                            }
+                            else
+                                Lista.ListaSudditi[i].Tassabile = true;
+                            break;
+                        case "Guerriero":
+                            Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 450;
+                            if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
+                            {
+                                Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
+                            }
+                            else
+                                Lista.ListaSudditi[i].Tassabile = true;
+                            break;
 
-
-
-
-
-
-
-
-
+                        case "Altro":
+                            Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo + 300;
+                            if (Lista.ListaSudditi[i].DenariSuddTassabile < 500)
+                            {
+                                Lista.ListaSudditi[i].DenariSuddTassabile = Lista.ListaSudditi[i].DenariSuddTassabile + 300;
+                            }
+                            else
+                                Lista.ListaSudditi[i].Tassabile = true;
+                            break;
+                    }
+                    //TASSAZIONE
+                    //tassabile significa che ha già ricevuto i 500 denari non tassabili annui
+                    if (Lista.ListaSudditi[i].Tassabile == true)
+                    {
+                        //Si assegnano le tasse da pagare come "tasseNonPagate"
+                        Lista.ListaSudditi[i].TasseNonPagate= Lista.ListaSudditi[i].TasseNonPagate+(15 / 100) * Lista.ListaSudditi[i].Saldo;
+                        //queste sono le tasse del mese
+                        float TasseEffettive = (15 / 100) * Lista.ListaSudditi[i].Saldo;
+                        //spese random del suddito per variati motivi( cibo, alloggio, ecc)
+                        Random SpeseAbitante = new Random();
+                        int SpeseAbitanteint = SpeseAbitante.Next(0, 3);
+                        //si potrebbe fare che queste spese esterne non rientrino nelle tassenonpagate, e che vengano sottratte subito
+                        switch (SpeseAbitanteint)
+                        {
+                            case 0:
+                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate+60;
+                                break;
+                            case 1:
+                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate+100;
+                                break;
+                            case 2:
+                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate+150;
+                                break;
+                            case 3:
+                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate+200;
+                                break;
+                        }
+                        //si controlla se il suddito ha abbastanza denaro per pagare le spese mensili+tasse
+                        if (Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate <= 0)
+                        {
+                            //gli viene data la possibilità di pagarne il 30%, se riesce
+                            if (Lista.ListaSudditi[i].Saldo - (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate >= 0)
+                            {
+                                //WIP
+                                
+                            }
+                            //il suddito non ha abbastanza soldi per pagare
+                            Lista.ListaSudditi[i].MesiNonPagati++;
+                            //se i mesi non pagati sono >=1 si sa che è in ritardo
+                            if (Lista.ListaSudditi[i].MesiNonPagati == 12||Lista.ListaSudditi[i].MesiNonPagati==24)
+                            {
+                                //ogni anno si calcola un interesse del 30% di tutte le tasse non pagate 
+                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate;
+                            }
+                            else
+                            if (Lista.ListaSudditi[i].MesiNonPagati == 36)
+                            {
+                                //il suddito va ucciso
+                                Contea.SaldoRe = Contea.SaldoRe + Lista.ListaSudditi[i].Saldo;
+                                SudditiInsolventi++;
+                                SudditiMorti++;
+                                //si rimuove dalla lista degli abitanti
+                                Lista.ListaSudditi.Remove(Lista.ListaSudditi[i]);
+                            }
+                        }
+                        else
+                        {
+                            //è riuscito a pagare tutto in un colpo e non ha debiti
+                            Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate;
+                            //calcolo ricavi totali dello stato (Costi Totali-spese esterne alle tasse)
+                            TassazioneTotale = TassazioneTotale + TasseEffettive;
+                            Lista.ListaSudditi[i].TasseNonPagate = 0;
+                            
+                        }
+                    }
 
                 }
-
-
-
-
             }
         }
-    }
-}
+}   }
+
 public class Liste
 {
     public List<Suddito> ListaSudditi = new List<Suddito>();
