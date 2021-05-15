@@ -26,11 +26,12 @@ namespace sceriffo0
         // DA FINIRE *non toccare*:
         // Login e registrazione    completati
         // UI                       semi-completa mancano solo decorazioni
-        // Tassazione               incompleta
+        // Tassazione               completati
         // Stipendi                 completati
         // Gestione MortiNascite    completati
         // Eventi casuali           incompleta
-        // ORA: Tassazione
+        // ORA: Calcolare gli introiti dello stato e controllarne le variabili!
+        
 
         Utente User = new Utente(); //utente con password
         Liste Lista = new Liste(); //creazione oggetto lista
@@ -41,7 +42,7 @@ namespace sceriffo0
         string[] NomiFemminili = new string[70];
         string[] Cognomi = new string[57];
 
-       
+
 
         public Tasse1()
         {
@@ -502,7 +503,7 @@ namespace sceriffo0
             int SudditiLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
             int SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
 
-            int SudditiInsolventi=0; //si aggiungono dopo il conto dele tasse
+            int SudditiInsolventi = 0; //si aggiungono dopo il conto dele tasse
 
             int SudditiNuovi;
             int SudditiMorti;
@@ -514,7 +515,7 @@ namespace sceriffo0
             SudditiTotali = SudditiTotali - SudditiMorti;
 
             //VARIABILI TASSAZIONE
-            float TassazioneTotale=0;
+            float TassazioneTotale = 0;
             float IntroitiMensili = 0;
             float IntroitiPersi = 0;
 
@@ -590,7 +591,17 @@ namespace sceriffo0
 
 
             }
-            //si serializza alla fine di tutto
+            //MORTE
+            Random SudditoMorto;
+            //viene creato un random che prende a caso un indice della listasudditi 
+            //(viene ripetuto tante volte quanti sono i morti) e tale persona con indice X viene tolta dalla lista
+            for (int  i = 0;  i <SudditiMorti;  i++)
+            {
+                SudditoMorto = new Random();
+                int IndiceListaMorto = SudditoMorto.Next(0, Lista.ListaSudditi.Count);
+                Lista.ListaSudditi.RemoveAt(IndiceListaMorto);
+            }
+            //si serializza alla fine
             //il 20% di coloro che non lavorano diventano lavoratori ogni anno (stima)
             int Apprendisti;
             Apprendisti = (20 / 100) * SudditiNonLavoratori;
@@ -598,7 +609,7 @@ namespace sceriffo0
 
             //i sudditi non lavoratori non sono tassabili
 
-            //STIPENDI
+            //STIPENDI & TASSE
             for (int i = 0; i < Lista.ListaSudditi.Count(); i++)
             {
                 //controllo se tassabile, i mestieri li hanno dalla nascita, la differenza sta nel fatto
@@ -618,7 +629,7 @@ namespace sceriffo0
                             }
                             else
                                 Lista.ListaSudditi[i].Tassabile = true;
-                            
+
                             break;
 
                         case "Fabbro":
@@ -655,71 +666,121 @@ namespace sceriffo0
                     if (Lista.ListaSudditi[i].Tassabile == true)
                     {
                         //Si assegnano le tasse da pagare come "tasseNonPagate"
-                        Lista.ListaSudditi[i].TasseNonPagate= Lista.ListaSudditi[i].TasseNonPagate+(15 / 100) * Lista.ListaSudditi[i].Saldo;
-                        //queste sono le tasse del mese
-                        float TasseEffettive = (15 / 100) * Lista.ListaSudditi[i].Saldo;
+                        Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + (15 / 100) * Lista.ListaSudditi[i].Saldo;
                         //spese random del suddito per variati motivi( cibo, alloggio, ecc)
                         Random SpeseAbitante = new Random();
                         int SpeseAbitanteint = SpeseAbitante.Next(0, 3);
-                        //si potrebbe fare che queste spese esterne non rientrino nelle tassenonpagate, e che vengano sottratte subito
+                        //le spese esterne non rientrano nelle tasse non pagate, e vengono sottratte subito
                         switch (SpeseAbitanteint)
                         {
                             case 0:
-                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate+60;
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - 20;
                                 break;
                             case 1:
-                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate+100;
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - 50;
                                 break;
                             case 2:
-                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate+150;
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - 60;
                                 break;
                             case 3:
-                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate+200;
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - 80;
                                 break;
+                            case 4:
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - 90;
+                                break;
+                            case 5:
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - 120;
+                                break;
+                            case 6:
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - 150;
+                                break;
+                            case 7:
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - 250;
+                                break;
+                            case 8:
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - 400;
+                                break;
+
                         }
-                        //si controlla se il suddito ha abbastanza denaro per pagare le spese mensili+tasse
-                        if (Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate <= 0)
+                        //si controlla se il suddito ha abbastanza denaro per pagare TASSE
+                        if (Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate < 0)
                         {
-                            //gli viene data la possibilità di pagarne il 30%, se riesce
-                            if (Lista.ListaSudditi[i].Saldo - (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate >= 0)
+                            //non ha abbastanza soldi, le tasse non pagate rimangono
+                            //gli si da la possibilità di pagare il 30% del debito ogni emse
+                            if (Lista.ListaSudditi[i].Saldo - (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate < 0)
                             {
-                                //WIP
-                                
-                            }
-                            //il suddito non ha abbastanza soldi per pagare
-                            Lista.ListaSudditi[i].MesiNonPagati++;
-                            //se i mesi non pagati sono >=1 si sa che è in ritardo
-                            if (Lista.ListaSudditi[i].MesiNonPagati == 12||Lista.ListaSudditi[i].MesiNonPagati==24)
-                            {
-                                //ogni anno si calcola un interesse del 30% di tutte le tasse non pagate 
-                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate;
+                                // se non riesce a pagare nemmeno il 30% aumentano i mesi in cui non ha pagato  e le tasse non pagate rimangono
+                                Lista.ListaSudditi[i].MesiNonPagati++;
                             }
                             else
-                            if (Lista.ListaSudditi[i].MesiNonPagati == 36)
                             {
-                                //il suddito va ucciso
-                                Contea.SaldoRe = Contea.SaldoRe + Lista.ListaSudditi[i].Saldo;
-                                SudditiInsolventi++;
-                                SudditiMorti++;
-                                //si rimuove dalla lista degli abitanti
-                                Lista.ListaSudditi.Remove(Lista.ListaSudditi[i]);
+                                float tassazioneParzialePagata;
+                                //può pagarne il 30%
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate;
+                                //viene calcolato il profitto della contea
+                                tassazioneParzialePagata = (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate;
+                                //viene tolto il 30% del debito
+                                Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate - tassazioneParzialePagata;
+                                //i mesi in cui non viene pagato TUTTO il debito continuano
+                                Lista.ListaSudditi[i].MesiNonPagati++;
+                                //incasso della contea
+                                TassazioneTotale = TassazioneTotale + tassazioneParzialePagata;
                             }
+
                         }
                         else
                         {
                             //è riuscito a pagare tutto in un colpo e non ha debiti
-                            Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate;
-                            //calcolo ricavi totali dello stato (Costi Totali-spese esterne alle tasse)
-                            TassazioneTotale = TassazioneTotale + TasseEffettive;
-                            Lista.ListaSudditi[i].TasseNonPagate = 0;
+                            float tassazioneCompletaPagata = Lista.ListaSudditi[i].TasseNonPagate;
                             
+                            Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate;
+                            Lista.ListaSudditi[i].TasseNonPagate = 0;
+                            //il numero di mesi non pagati si resetta, dato che ha estinto tutti i debiti
+                            Lista.ListaSudditi[i].MesiNonPagati = 0;
+                            //la contea incassa le tasse
+                            TassazioneTotale = TassazioneTotale + tassazioneCompletaPagata;
+
+                        }
+                        //si aggiunge un interesse del 30% nel caso che non abbia pagato le tasse per 12 o 24 mesi
+                        if (Lista.ListaSudditi[i].MesiNonPagati == 12 || Lista.ListaSudditi[i].MesiNonPagati == 24)
+                        {
+                            Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate;
+                        }
+                        // se non è riuscito a pagare i debiti entro 36 mesi
+                        else
+                        {
+                            if (Lista.ListaSudditi[i].MesiNonPagati == 36)
+                            {
+                                //il denaro insufficiente viene confiscato (conta come introito)
+                                IntroitiMensili = IntroitiMensili + Lista.ListaSudditi[i].Saldo;
+
+                                //il suddito viene ucciso
+                                SudditiInsolventi++;
+                                SudditiMorti++;
+                                //viene tolto dalla lista degli abitanti
+                                Lista.ListaSudditi.Remove(Lista.ListaSudditi[i]);
+
+                            }
                         }
                     }
 
                 }
             }
+            // CALCOLO INTROITI DELLO STATO
+            //alla fine del ciclo che assegna stipendi e fa pagare i tributi, si calcola il resoconto della contea
+            
+
+
+
+
+
+
+
+
+
         }
-}   }
+    }
+}
 
 public class Liste
 {
@@ -750,7 +811,7 @@ public class Suddito
     }
     public bool Etàlavorativa
     {
-        set { etàlavorativa =value; }
+        set { etàlavorativa = value; }
         get { return etàlavorativa; }
     }
     public float Saldo
