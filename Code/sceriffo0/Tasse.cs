@@ -1,11 +1,4 @@
-﻿//INFORMAZIONI IMPORTANTI DA NON TOCCARE:
-/*
- if you use the hash (outdated md5) of a secret string (too short to be secure) to encrypt the password there is no point in hashing the secret here I think
- tripleDES is also deprecated
- storing secrets in code is security issue,
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,20 +11,12 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 
-//https://www.youtube.com/watch?v=5Anto1N_FSs
 namespace sceriffo0
 {
     public partial class Tasse1 : Form
     {
-        // DA FINIRE *non toccare*:
-        // Login e registrazione    completati
-        // UI                       semi-completa mancano solo decorazioni
-        // Tassazione               completati
-        // Stipendi                 completati
-        // Gestione MortiNascite    completati
-        // Eventi casuali           incompleta
-        // ORA: Calcolare gli introiti dello stato e controllarne le variabili!
-        
+        //ORA: serializzazione della lista a fine mese, deser al login, se il file già esiste
+        // fixare le liste nelle catastrofi
 
         Utente User = new Utente(); //utente con password
         Liste Lista = new Liste(); //creazione oggetto lista
@@ -59,6 +44,7 @@ namespace sceriffo0
             PannelloAltoSX.Visible = false;
             PannelloBassoSX.Visible = false;
             PannelloBassoDX.Visible = false;
+            AvantiMeseBtn.Visible = false;
             if (Directory.Exists(@"Login") == true)
             {
                 //deserializzazione del file 
@@ -313,10 +299,12 @@ namespace sceriffo0
             {
                 //la password è corretta e corrisponde con quella salvata nella registrazione
                 panelLogIn.Visible = false;
+                pannelRegistrazione.Visible = false;
                 PannelloAltoDX.Visible = true;
                 PannelloAltoSX.Visible = true;
                 PannelloBassoSX.Visible = true;
                 PannelloBassoDX.Visible = true;
+                AvantiMeseBtn.Visible = true;
             }
             else
             {
@@ -371,10 +359,12 @@ namespace sceriffo0
                         passwordAccettata = true;
 
                         pannelRegistrazione.Visible = false;
+                        panelLogIn.Visible = false;
                         PannelloAltoDX.Visible = true;
                         PannelloAltoSX.Visible = true;
                         PannelloBassoSX.Visible = true;
                         PannelloBassoDX.Visible = true;
+                        AvantiMeseBtn.Visible = true;
 
                     }
                     else
@@ -397,6 +387,7 @@ namespace sceriffo0
 
             if (passwordAccettata == true)
             {
+
                 //generazione degli abitanti alla prima registrazione
                 Suddito NuovoSuddito;
                 Random SceltaMestiere = new Random();
@@ -478,7 +469,7 @@ namespace sceriffo0
                 File.Create(@"Data\\ListaAbitanti.json").Close();
                 File.WriteAllText(@"Data\\ListaAbitanti.json", JsonConvert.SerializeObject(Lista, Formatting.Indented));
 
-
+                
             }
         }
 
@@ -499,24 +490,21 @@ namespace sceriffo0
             }
 
             //GESTIONE NASCITE
+            //basta refresharli alla fine
             int SudditiTotali = Lista.ListaSudditi.Count();
             int SudditiLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
             int SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
-
             int SudditiInsolventi = 0; //si aggiungono dopo il conto dele tasse
-
-            int SudditiNuovi;
-            int SudditiMorti;
+            int SudditiNuovi=0;
+            int SudditiMorti=0;
             //nascite
-            SudditiNuovi = (8 / 100) * SudditiTotali;
-            SudditiTotali = SudditiTotali + SudditiNuovi;
+            SudditiNuovi = (int)Math.Round(SudditiTotali*0.08,0); 
             //morti
-            SudditiMorti = (5 / 100) * SudditiTotali;
-            SudditiTotali = SudditiTotali - SudditiMorti;
+            SudditiMorti = (int)Math.Round(SudditiTotali * 0.05,0); 
 
             //VARIABILI TASSAZIONE
             float TassazioneTotale = 0;
-            float IntroitiMensili = 0;
+            float IntroitiPrevisti = 0;
             float IntroitiPersi = 0;
 
             Suddito NuovoSuddito;
@@ -598,13 +586,14 @@ namespace sceriffo0
             for (int  i = 0;  i <SudditiMorti;  i++)
             {
                 SudditoMorto = new Random();
-                int IndiceListaMorto = SudditoMorto.Next(0, Lista.ListaSudditi.Count);
+                int IndiceListaMorto = SudditoMorto.Next(0, Lista.ListaSudditi.Count());
                 Lista.ListaSudditi.RemoveAt(IndiceListaMorto);
             }
             //si serializza alla fine
             //il 20% di coloro che non lavorano diventano lavoratori ogni anno (stima)
             int Apprendisti;
-            Apprendisti = (20 / 100) * SudditiNonLavoratori;
+            Apprendisti = (int)Math.Round(SudditiNonLavoratori*0.2,0);
+            SudditiNonLavoratori = SudditiNonLavoratori - Apprendisti;
             SudditiLavoratori = SudditiLavoratori + Apprendisti;
 
             //i sudditi non lavoratori non sono tassabili
@@ -666,7 +655,7 @@ namespace sceriffo0
                     if (Lista.ListaSudditi[i].Tassabile == true)
                     {
                         //Si assegnano le tasse da pagare come "tasseNonPagate"
-                        Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + (15 / 100) * Lista.ListaSudditi[i].Saldo;
+                        Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + Lista.ListaSudditi[i].Saldo * (float)0.15;
                         //spese random del suddito per variati motivi( cibo, alloggio, ecc)
                         Random SpeseAbitante = new Random();
                         int SpeseAbitanteint = SpeseAbitante.Next(0, 3);
@@ -707,7 +696,7 @@ namespace sceriffo0
                         {
                             //non ha abbastanza soldi, le tasse non pagate rimangono
                             //gli si da la possibilità di pagare il 30% del debito ogni emse
-                            if (Lista.ListaSudditi[i].Saldo - (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate < 0)
+                            if (Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate* (float)0.3 < 0)
                             {
                                 // se non riesce a pagare nemmeno il 30% aumentano i mesi in cui non ha pagato  e le tasse non pagate rimangono
                                 Lista.ListaSudditi[i].MesiNonPagati++;
@@ -716,9 +705,9 @@ namespace sceriffo0
                             {
                                 float tassazioneParzialePagata;
                                 //può pagarne il 30%
-                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate;
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate* (float)0.3;
                                 //viene calcolato il profitto della contea
-                                tassazioneParzialePagata = (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate;
+                                tassazioneParzialePagata = Lista.ListaSudditi[i].TasseNonPagate*(float)0.3;
                                 //viene tolto il 30% del debito
                                 Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate - tassazioneParzialePagata;
                                 //i mesi in cui non viene pagato TUTTO il debito continuano
@@ -744,16 +733,13 @@ namespace sceriffo0
                         //si aggiunge un interesse del 30% nel caso che non abbia pagato le tasse per 12 o 24 mesi
                         if (Lista.ListaSudditi[i].MesiNonPagati == 12 || Lista.ListaSudditi[i].MesiNonPagati == 24)
                         {
-                            Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + (30 / 100) * Lista.ListaSudditi[i].TasseNonPagate;
+                            Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + (int)Math.Round(Lista.ListaSudditi[i].TasseNonPagate*0.3,0);
                         }
                         // se non è riuscito a pagare i debiti entro 36 mesi
                         else
                         {
                             if (Lista.ListaSudditi[i].MesiNonPagati == 36)
                             {
-                                //il denaro insufficiente viene confiscato (conta come introito)
-                                IntroitiMensili = IntroitiMensili + Lista.ListaSudditi[i].Saldo;
-
                                 //il suddito viene ucciso
                                 SudditiInsolventi++;
                                 SudditiMorti++;
@@ -768,15 +754,114 @@ namespace sceriffo0
             }
             // CALCOLO INTROITI DELLO STATO
             //alla fine del ciclo che assegna stipendi e fa pagare i tributi, si calcola il resoconto della contea
+            //l'80% delle tasse prelevate vanno usate per pagare l'amministrazione dello stato
+            TassazioneTotale = TassazioneTotale * (float)0.8;
+            //40% al re, 60% allo stato
+            Contea.SaldoRe = TassazioneTotale*(float)0.4;
+            Contea.TesoroStato = TassazioneTotale* (float)0.6;
             
 
+            //calcolo della tassazione ideale
+            //gli introiti statali previsti sarebbero il 15% del saldo di ognuno, dato che le tasse sono uguali per tutti
+            for (int i = 0; i < Lista.ListaSudditi.Count(); i++)
+            {
+                //per evitare divisioni con zeri, si contano solo gli introiti da chi ha qualcosa
+                if (Lista.ListaSudditi[i].Saldo != 0)
+                {
+                    IntroitiPrevisti = IntroitiPrevisti + Lista.ListaSudditi[i].Saldo* (float)0.15;
+                }
+            }
+
+            IntroitiPersi = IntroitiPrevisti - TassazioneTotale;
+
+            //refresh di alcune variabili di conteggio
+            SudditiTotali = Lista.ListaSudditi.Count();
+            SudditiLavoratori= Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
+            SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
+
+
+            //refresh dei dati in output nell' UI
+
+            labelNumeroSudditi.Text = SudditiTotali.ToString();
+            labelNumeroLavoratori.Text = SudditiLavoratori.ToString();
+            labelNumeroSudditiNonLavoratori.Text = SudditiNonLavoratori.ToString();
+            labelNumeroInsolventi.Text = SudditiInsolventi.ToString();
+            labelNumeroNati.Text = SudditiNuovi.ToString();
+            labelNumeroMorti.Text = SudditiMorti.ToString();
+
+            //arrotondamento al centesimo delle monete
+            LabelNumeroSoldiCorona.Text = Contea.SaldoRe.ToString("0.00") + "£";
+            LabelNumeroSoldiStato.Text = Contea.TesoroStato.ToString("0.00") + "£";
+
+            LabelNumeroIntroitiMensili.Text = TassazioneTotale.ToString("0.00") + "£";
+            LabelNumeroIntroitiIdeali.Text = IntroitiPrevisti.ToString("0.00") + "£";
+            LabelNumeroIntroitiPersi.Text = IntroitiPersi.ToString("0.00") + "£";
+
+            //CATASTROFI
+            Random RdmCatastrofe = new Random();
+            int ChanceCat = RdmCatastrofe.Next(0, 50);
+            switch (ChanceCat)
+            {
+                //pestilenza
+                case 1:
+                    //80% tesoro stato usato
+                    Contea.TesoroStato = Contea.TesoroStato * (float)0.8;
+                    //il saldo del re viene portato a 0 per spese di incastellamento
+                    Contea.SaldoRe = 0;
+                    //il 70% della popolazione muore
+                    int mortiPestilenza = (int)Math.Round((Lista.ListaSudditi.Count()-1)*0.7,0);
+                    for (int i = 0; i < mortiPestilenza-1; i++)
+                    {
+                        Lista.ListaSudditi.RemoveAt(i);
+                    }
+                    MessageBox.Show("E'sopraggiunta un'epidemia!","!",MessageBoxButtons.OK);
+                    break;
+
+                case 2|3|4|5:
+                    //incursione nemica
+                    //40% del tesoro delo stato viene usato
+                    Contea.TesoroStato = Contea.TesoroStato * (float)0.4;
+                    //il 50% della popolazione muore
+                    int mortiAssalto = (int)Math.Round((Lista.ListaSudditi.Count() - 1) * 0.5, 0);
+                    for (int i = 0; i < mortiAssalto-1; i++)
+                    {
+                        Lista.ListaSudditi.RemoveAt(i);
+                    }
+                    MessageBox.Show("E'avvenuta un'incursione nemica!", "!", MessageBoxButtons.OK);
+                    break;
+
+                case 6|7|8|9|10|11|12|13:
+                    //inondazione
+                    //20% del tesoro delo stato viene usato
+                    Contea.TesoroStato = Contea.TesoroStato * (float)0.2;
+                    //il 35% della popolazione muore
+                    int mortiIndondazione= (int)Math.Round((Lista.ListaSudditi.Count() - 1) * 0.35, 0);
+                    for (int i = 0; i < mortiIndondazione-1; i++)
+                    {
+                        Lista.ListaSudditi.RemoveAt(i);
+                    }
+                    MessageBox.Show("La contea è stata inondata dal fiume esondato!", "!", MessageBoxButtons.OK);
+                    break;
+            }
+
+            
+
+            //Serializzazione dati nuovi
 
 
 
 
 
-
-
+            //dopo la serializzaizone le var si resettano
+            IntroitiPersi = 0;
+            IntroitiPrevisti = 0;
+            TassazioneTotale = 0;
+            SudditiMorti = 0;
+            SudditiNuovi = 0;
+            SudditiInsolventi = 0;
+            SudditiTotali = 0;
+            SudditiLavoratori = 0;
+            SudditiNonLavoratori = 0;
 
         }
     }
