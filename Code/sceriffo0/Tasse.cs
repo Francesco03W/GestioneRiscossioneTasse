@@ -15,12 +15,10 @@ namespace sceriffo0
 {
     public partial class Tasse1 : Form
     {
-        //ORA: serializzazione della lista a fine mese, deser al login, se il file già esiste
-        // fixare le liste nelle catastrofi
-
         Utente User = new Utente(); //utente con password
         Liste Lista = new Liste(); //creazione oggetto lista
         Stato Contea = new Stato(); //creazione oggetto stato
+        Tempo Orologio = new Tempo();
 
         //inizializzazione array nomi Maschili & femminili
         string[] NomiMaschili = new string[70];
@@ -297,6 +295,18 @@ namespace sceriffo0
             }
             if (contenitorePasswordLogin.Text == User.Password)
             {
+                //si ricaricano i dati del programma
+                //caricamento lista sudditi
+                Lista.ListaSudditi = JsonConvert.DeserializeObject<List<Suddito>>(File.ReadAllText(String.Format(@"Saves\\ListSave.json")));
+
+                //caricamento dati economici
+                Contea = JsonConvert.DeserializeObject<Stato>(File.ReadAllText(String.Format(@"Saves\\EconomySave.json")));
+
+                //caricamento dati clock
+                Orologio= JsonConvert.DeserializeObject<Tempo>(File.ReadAllText(String.Format(@"Saves\\ClockSave.json")));
+
+                MessageBox.Show("Il caricamento dei dati è avvenuto con successo!", "SUCCESSO", MessageBoxButtons.OK);
+
                 //la password è corretta e corrisponde con quella salvata nella registrazione
                 panelLogIn.Visible = false;
                 pannelRegistrazione.Visible = false;
@@ -305,6 +315,8 @@ namespace sceriffo0
                 PannelloBassoSX.Visible = true;
                 PannelloBassoDX.Visible = true;
                 AvantiMeseBtn.Visible = true;
+                BtnSave.Visible = true;
+
             }
             else
             {
@@ -314,6 +326,10 @@ namespace sceriffo0
 
         private void BottoneInvioRegistrazione_Click(object sender, EventArgs e)
         {
+            //tempo registrazione
+            Orologio.Mese = 1;
+            Orologio.Anno = 0;
+
             bool passwordAccettata = false;
             char lettpass;
             int lettCAPS = 0;
@@ -365,7 +381,7 @@ namespace sceriffo0
                         PannelloBassoSX.Visible = true;
                         PannelloBassoDX.Visible = true;
                         AvantiMeseBtn.Visible = true;
-
+                        BtnSave.Visible = true;
                     }
                     else
                     {
@@ -465,22 +481,22 @@ namespace sceriffo0
 
                 }
                 //serializzare listasudditi
-                Directory.CreateDirectory(@"Data");
-                File.Create(@"Data\\ListaAbitanti.json").Close();
-                File.WriteAllText(@"Data\\ListaAbitanti.json", JsonConvert.SerializeObject(Lista, Formatting.Indented));
-
-                
+                //quando si fa la registrazione si parte dall'anno 0
+                Directory.CreateDirectory(@"Data\\0");
+                Directory.CreateDirectory(@"Saves");
+                File.Create(@"Data\\0\\1.json").Close();
+                File.WriteAllText(String.Format(@"Data\\0\\1.json", Orologio.Anno, Orologio.Mese), JsonConvert.SerializeObject(Lista, Formatting.Indented));
             }
         }
 
         private void AvantiMeseBtn_Click(object sender, EventArgs e)
         {
-            Tempo Orologio = new Tempo();
-            Orologio.Anno = 0;
-            Orologio.Mese = Orologio.Mese + 1;
+            //si avanza di un mese, così i file sono salvati come mese Y nella cartella anno X
+            Orologio.Mese++;
             if (Orologio.Mese == 12)
             {
                 Orologio.Anno = Orologio.Anno + 1;
+                Orologio.Mese = 1;
                 //si resettano i 500 denari non tassabili
                 for (int i = 0; i < Lista.ListaSudditi.Count(); i++)
                 {
@@ -495,12 +511,12 @@ namespace sceriffo0
             int SudditiLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
             int SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
             int SudditiInsolventi = 0; //si aggiungono dopo il conto dele tasse
-            int SudditiNuovi=0;
-            int SudditiMorti=0;
+            int SudditiNuovi = 0;
+            int SudditiMorti = 0;
             //nascite
-            SudditiNuovi = (int)Math.Round(SudditiTotali*0.08,0); 
+            SudditiNuovi = (int)Math.Round(SudditiTotali * 0.08, 0);
             //morti
-            SudditiMorti = (int)Math.Round(SudditiTotali * 0.05,0); 
+            SudditiMorti = (int)Math.Round(SudditiTotali * 0.05, 0);
 
             //VARIABILI TASSAZIONE
             float TassazioneTotale = 0;
@@ -583,7 +599,7 @@ namespace sceriffo0
             Random SudditoMorto;
             //viene creato un random che prende a caso un indice della listasudditi 
             //(viene ripetuto tante volte quanti sono i morti) e tale persona con indice X viene tolta dalla lista
-            for (int  i = 0;  i <SudditiMorti;  i++)
+            for (int i = 0; i < SudditiMorti; i++)
             {
                 SudditoMorto = new Random();
                 int IndiceListaMorto = SudditoMorto.Next(0, Lista.ListaSudditi.Count());
@@ -591,8 +607,35 @@ namespace sceriffo0
             }
             //si serializza alla fine
             //il 20% di coloro che non lavorano diventano lavoratori ogni anno (stima)
+            //bisogna cambiare lo stato delle persone nella lista
             int Apprendisti;
-            Apprendisti = (int)Math.Round(SudditiNonLavoratori*0.2,0);
+
+            int NumeroNonLav = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
+            Apprendisti = (int)Math.Round(NumeroNonLav * 0.2, 0);
+
+            List<int> ListaNonLav = new List<int>();
+            //mettere indici di persone non lav in nuova lista con stessi indici
+            for (int i = 0; i < Lista.ListaSudditi.Count(); i++)
+            {
+                if (Lista.ListaSudditi[i].Etàlavorativa == false)
+                 {
+                    ListaNonLav.Add(i);
+                 }
+            }
+            Random SceltaApprendista = new Random();
+            for (int i = 0; i < Apprendisti; i++)
+            {
+                //scelgo a caso un tizio nella lista dei non lavoratori
+                int IndiceSceltaApp = SceltaApprendista.Next(0, ListaNonLav.Count()-1);
+
+                //della lista dei sudditi, prendo il valore di indice IndicesceltaApp nella lista di quelli non lavoratori
+                Lista.ListaSudditi[ListaNonLav[IndiceSceltaApp]].Etàlavorativa = true;
+
+                ListaNonLav.RemoveAt(IndiceSceltaApp);
+            }
+
+
+
             SudditiNonLavoratori = SudditiNonLavoratori - Apprendisti;
             SudditiLavoratori = SudditiLavoratori + Apprendisti;
 
@@ -696,7 +739,7 @@ namespace sceriffo0
                         {
                             //non ha abbastanza soldi, le tasse non pagate rimangono
                             //gli si da la possibilità di pagare il 30% del debito ogni emse
-                            if (Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate* (float)0.3 < 0)
+                            if (Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate * (float)0.3 < 0)
                             {
                                 // se non riesce a pagare nemmeno il 30% aumentano i mesi in cui non ha pagato  e le tasse non pagate rimangono
                                 Lista.ListaSudditi[i].MesiNonPagati++;
@@ -705,9 +748,9 @@ namespace sceriffo0
                             {
                                 float tassazioneParzialePagata;
                                 //può pagarne il 30%
-                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate* (float)0.3;
+                                Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate * (float)0.3;
                                 //viene calcolato il profitto della contea
-                                tassazioneParzialePagata = Lista.ListaSudditi[i].TasseNonPagate*(float)0.3;
+                                tassazioneParzialePagata = Lista.ListaSudditi[i].TasseNonPagate * (float)0.3;
                                 //viene tolto il 30% del debito
                                 Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate - tassazioneParzialePagata;
                                 //i mesi in cui non viene pagato TUTTO il debito continuano
@@ -721,7 +764,7 @@ namespace sceriffo0
                         {
                             //è riuscito a pagare tutto in un colpo e non ha debiti
                             float tassazioneCompletaPagata = Lista.ListaSudditi[i].TasseNonPagate;
-                            
+
                             Lista.ListaSudditi[i].Saldo = Lista.ListaSudditi[i].Saldo - Lista.ListaSudditi[i].TasseNonPagate;
                             Lista.ListaSudditi[i].TasseNonPagate = 0;
                             //il numero di mesi non pagati si resetta, dato che ha estinto tutti i debiti
@@ -733,7 +776,7 @@ namespace sceriffo0
                         //si aggiunge un interesse del 30% nel caso che non abbia pagato le tasse per 12 o 24 mesi
                         if (Lista.ListaSudditi[i].MesiNonPagati == 12 || Lista.ListaSudditi[i].MesiNonPagati == 24)
                         {
-                            Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + (int)Math.Round(Lista.ListaSudditi[i].TasseNonPagate*0.3,0);
+                            Lista.ListaSudditi[i].TasseNonPagate = Lista.ListaSudditi[i].TasseNonPagate + (int)Math.Round(Lista.ListaSudditi[i].TasseNonPagate * 0.3, 0);
                         }
                         // se non è riuscito a pagare i debiti entro 36 mesi
                         else
@@ -754,12 +797,12 @@ namespace sceriffo0
             }
             // CALCOLO INTROITI DELLO STATO
             //alla fine del ciclo che assegna stipendi e fa pagare i tributi, si calcola il resoconto della contea
-            //l'80% delle tasse prelevate vanno usate per pagare l'amministrazione dello stato
-            TassazioneTotale = TassazioneTotale * (float)0.8;
+            //il 95% delle tasse prelevate vanno usate per pagare l'amministrazione dello stato, se ne prendono il 5%
+            TassazioneTotale = TassazioneTotale * (float)0.05;
             //40% al re, 60% allo stato
-            Contea.SaldoRe = TassazioneTotale*(float)0.4;
-            Contea.TesoroStato = TassazioneTotale* (float)0.6;
-            
+            Contea.SaldoRe = Contea.SaldoRe+TassazioneTotale * (float)0.4;
+            Contea.TesoroStato = Contea.TesoroStato+TassazioneTotale * (float)0.6;
+
 
             //calcolo della tassazione ideale
             //gli introiti statali previsti sarebbero il 15% del saldo di ognuno, dato che le tasse sono uguali per tutti
@@ -768,7 +811,7 @@ namespace sceriffo0
                 //per evitare divisioni con zeri, si contano solo gli introiti da chi ha qualcosa
                 if (Lista.ListaSudditi[i].Saldo != 0)
                 {
-                    IntroitiPrevisti = IntroitiPrevisti + Lista.ListaSudditi[i].Saldo* (float)0.15;
+                    IntroitiPrevisti = IntroitiPrevisti + Lista.ListaSudditi[i].Saldo * (float)0.15;
                 }
             }
 
@@ -776,9 +819,9 @@ namespace sceriffo0
 
             //refresh di alcune variabili di conteggio
             SudditiTotali = Lista.ListaSudditi.Count();
-            SudditiLavoratori= Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
+            SudditiLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
             SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
-
+           
 
             //refresh dei dati in output nell' UI
 
@@ -804,52 +847,101 @@ namespace sceriffo0
             {
                 //pestilenza
                 case 1:
-                    //80% tesoro stato usato
-                    Contea.TesoroStato = Contea.TesoroStato * (float)0.8;
+                    MessageBox.Show("E'sopraggiunta un'epidemia!", "!", MessageBoxButtons.OK);
+                    //95% tesoro stato usato, rimane il 5%
+                    Contea.TesoroStato = Contea.TesoroStato * (float)0.05;
                     //il saldo del re viene portato a 0 per spese di incastellamento
                     Contea.SaldoRe = 0;
-                    //il 70% della popolazione muore
-                    int mortiPestilenza = (int)Math.Round((Lista.ListaSudditi.Count()-1)*0.7,0);
-                    for (int i = 0; i < mortiPestilenza-1; i++)
-                    {
-                        Lista.ListaSudditi.RemoveAt(i);
-                    }
-                    MessageBox.Show("E'sopraggiunta un'epidemia!","!",MessageBoxButtons.OK);
-                    break;
-
-                case 2|3|4|5:
-                    //incursione nemica
-                    //40% del tesoro delo stato viene usato
-                    Contea.TesoroStato = Contea.TesoroStato * (float)0.4;
                     //il 50% della popolazione muore
-                    int mortiAssalto = (int)Math.Round((Lista.ListaSudditi.Count() - 1) * 0.5, 0);
-                    for (int i = 0; i < mortiAssalto-1; i++)
+                    int mortiPestilenza = (int)Math.Round(Lista.ListaSudditi.Count() * 0.5, 0);
+                    for (int i = 0; i < mortiPestilenza; i++)
                     {
-                        Lista.ListaSudditi.RemoveAt(i);
+                        Lista.ListaSudditi.RemoveAt(0);
                     }
-                    MessageBox.Show("E'avvenuta un'incursione nemica!", "!", MessageBoxButtons.OK);
+                    //refresh di alcune variabili di conteggio
+                    SudditiTotali = Lista.ListaSudditi.Count();
+                    SudditiLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
+                    SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
+
+
+                    //refresh dei dati in output nell' UI
+
+                    labelNumeroSudditi.Text = SudditiTotali.ToString();
+                    labelNumeroLavoratori.Text = SudditiLavoratori.ToString();
+                    labelNumeroSudditiNonLavoratori.Text = SudditiNonLavoratori.ToString();
+                    labelNumeroInsolventi.Text = SudditiInsolventi.ToString();
+                    labelNumeroNati.Text = SudditiNuovi.ToString();
+                    labelNumeroMorti.Text = SudditiMorti.ToString();
                     break;
 
-                case 6|7|8|9|10|11|12|13:
-                    //inondazione
-                    //20% del tesoro delo stato viene usato
+                case 2 | 3 | 4 | 5:
+                    //incursione nemica
+                    MessageBox.Show("E'avvenuta un'incursione nemica!", "!", MessageBoxButtons.OK);
+                    //80% del tesoro delo stato viene usato, rimane 20%
                     Contea.TesoroStato = Contea.TesoroStato * (float)0.2;
-                    //il 35% della popolazione muore
-                    int mortiIndondazione= (int)Math.Round((Lista.ListaSudditi.Count() - 1) * 0.35, 0);
-                    for (int i = 0; i < mortiIndondazione-1; i++)
+                    //70% del tesoro del re  viene usato
+                    Contea.SaldoRe = Contea.SaldoRe * (float)0.3;
+                    //il 30% della popolazione muore
+                    int mortiAssalto = (int)Math.Round(Lista.ListaSudditi.Count() * 0.3, 0);
+                    for (int i = 0; i < mortiAssalto; i++)
                     {
-                        Lista.ListaSudditi.RemoveAt(i);
+                        Lista.ListaSudditi.RemoveAt(0);
                     }
+                    //refresh di alcune variabili di conteggio
+                    SudditiTotali = Lista.ListaSudditi.Count();
+                    SudditiLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
+                    SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
+
+
+                    //refresh dei dati in output nell' UI
+
+                    labelNumeroSudditi.Text = SudditiTotali.ToString();
+                    labelNumeroLavoratori.Text = SudditiLavoratori.ToString();
+                    labelNumeroSudditiNonLavoratori.Text = SudditiNonLavoratori.ToString();
+                    labelNumeroInsolventi.Text = SudditiInsolventi.ToString();
+                    labelNumeroNati.Text = SudditiNuovi.ToString();
+                    labelNumeroMorti.Text = SudditiMorti.ToString();
+                    break;
+
+                case 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13:
+                    //inondazione
                     MessageBox.Show("La contea è stata inondata dal fiume esondato!", "!", MessageBoxButtons.OK);
+                    //50% del tesoro delo stato viene usato
+                    Contea.TesoroStato = Contea.TesoroStato * (float)0.5;
+                    //il 15% della popolazione muore
+                    int mortiIndondazione = (int)Math.Round(Lista.ListaSudditi.Count()* 0.15, 0);
+                    for (int i = 0; i < mortiIndondazione; i++)
+                    {
+                        Lista.ListaSudditi.RemoveAt(0);
+                    }
+                    //refresh di alcune variabili di conteggio
+                    SudditiTotali = Lista.ListaSudditi.Count();
+                    SudditiLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == true).Count();
+                    SudditiNonLavoratori = Lista.ListaSudditi.FindAll(X => X.Etàlavorativa == false).Count();
+
+
+                    //refresh dei dati in output nell' UI
+
+                    labelNumeroSudditi.Text = SudditiTotali.ToString();
+                    labelNumeroLavoratori.Text = SudditiLavoratori.ToString();
+                    labelNumeroSudditiNonLavoratori.Text = SudditiNonLavoratori.ToString();
+                    labelNumeroInsolventi.Text = SudditiInsolventi.ToString();
+                    labelNumeroNati.Text = SudditiNuovi.ToString();
+                    labelNumeroMorti.Text = SudditiMorti.ToString();
                     break;
             }
 
-            
+
 
             //Serializzazione dati nuovi
-
-
-
+            //i dati vengono serializzati e salvati in base al mese e all'anno
+            //se anno=0 non serve ricreare la cartella, è quella generata dalla registrazione
+            if (Orologio.Anno != 0)
+            {
+                Directory.CreateDirectory(String.Format(@"Data\\{0}", Orologio.Anno));
+            }
+            File.Create(String.Format(@"Data\\{0}\\{1}.json", Orologio.Anno, Orologio.Mese)).Close();
+            File.WriteAllText(String.Format(@"Data\\{0}\\{1}.json", Orologio.Anno, Orologio.Mese), JsonConvert.SerializeObject(Lista, Formatting.Indented));
 
 
             //dopo la serializzaizone le var si resettano
@@ -863,6 +955,27 @@ namespace sceriffo0
             SudditiLavoratori = 0;
             SudditiNonLavoratori = 0;
 
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            //tutti i dati vengono salvati in 3 json
+            //si disattiva il pulsante + mese così che non ci siano problemi durante il salvataggio
+            AvantiMeseBtn.Enabled = false;
+            File.Create(@"Saves\\ListSave.json").Close();
+            //serializzazione lista abitanti
+            File.WriteAllText(String.Format(@"Saves\\ListSave.json"), JsonConvert.SerializeObject(Lista.ListaSudditi, Formatting.Indented));
+            //salvataggio dei dati economici
+            File.Create(@"Saves\\EconomySave.json").Close();
+            File.WriteAllText(String.Format(@"Saves\\EconomySave.json"), JsonConvert.SerializeObject(Contea, Formatting.Indented));
+            //salvataggio del tempo
+            File.Create(@"Saves\\ClockSave.json").Close();
+            File.WriteAllText(String.Format(@"Saves\\ClockSave.json"), JsonConvert.SerializeObject(Orologio, Formatting.Indented));
+
+            MessageBox.Show("Il salvataggio è avvenuto con successo!", "SUCCESSO", MessageBoxButtons.OK);
+
+            //una volta finite le operazioni, il pulsante avanti mese ritorna attivo
+            AvantiMeseBtn.Enabled = true;
         }
     }
 }
@@ -950,7 +1063,6 @@ public class Stato
 {
     protected float saldoRE;
     protected float tesoroStato;
-    protected string condizioneStato;
 
     public float SaldoRe
     {
@@ -961,11 +1073,6 @@ public class Stato
     {
         set { tesoroStato = value; }
         get { return tesoroStato; }
-    }
-    public string CondizioneStato
-    {
-        set { condizioneStato = value; }
-        get { return condizioneStato; }
     }
 }
 public class Utente

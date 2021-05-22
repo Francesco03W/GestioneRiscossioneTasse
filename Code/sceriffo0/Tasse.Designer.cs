@@ -66,6 +66,7 @@
             this.labelScrittaSudditi = new System.Windows.Forms.Label();
             this.labelScrittaMorti = new System.Windows.Forms.Label();
             this.PannelloBassoDX = new System.Windows.Forms.Panel();
+            this.BtnSave = new System.Windows.Forms.Button();
             this.AvantiMeseBtn = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.Logo = new System.Windows.Forms.PictureBox();
@@ -74,6 +75,7 @@
             this.pannelRegistrazione.SuspendLayout();
             this.PannelloAltoDX.SuspendLayout();
             this.PannelloBassoSX.SuspendLayout();
+            this.PannelloBassoDX.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -489,10 +491,25 @@
             // 
             // PannelloBassoDX
             // 
+            this.PannelloBassoDX.Controls.Add(this.BtnSave);
             this.PannelloBassoDX.Location = new System.Drawing.Point(823, 353);
             this.PannelloBassoDX.Name = "PannelloBassoDX";
             this.PannelloBassoDX.Size = new System.Drawing.Size(432, 317);
             this.PannelloBassoDX.TabIndex = 4;
+            // 
+            // BtnSave
+            // 
+            this.BtnSave.BackColor = System.Drawing.Color.DarkBlue;
+            this.BtnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSave.ForeColor = System.Drawing.Color.GhostWhite;
+            this.BtnSave.Location = new System.Drawing.Point(117, 89);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(174, 73);
+            this.BtnSave.TabIndex = 14;
+            this.BtnSave.Text = "Salvataggio";
+            this.BtnSave.UseVisualStyleBackColor = false;
+            this.BtnSave.Visible = false;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // AvantiMeseBtn
             // 
@@ -554,6 +571,7 @@
             this.PannelloAltoDX.PerformLayout();
             this.PannelloBassoSX.ResumeLayout(false);
             this.PannelloBassoSX.PerformLayout();
+            this.PannelloBassoDX.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
             this.ResumeLayout(false);
 
@@ -600,6 +618,7 @@
         private System.Windows.Forms.Button AvantiMeseBtn;
         private System.Windows.Forms.PictureBox Logo;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button BtnSave;
     }
 }
 
